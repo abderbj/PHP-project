@@ -59,7 +59,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
         var alertCloseButtons = document.querySelectorAll('.btn-close');
         alertCloseButtons.forEach(function(button) {
             button.addEventListener('click', function() {
-                var alert = button.closest('.alert');
+                let alert = button.closest('.alert');
                 alert.classList.add('fade');
                 setTimeout(function() {
                     alert.remove();
