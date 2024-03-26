@@ -1,0 +1,29 @@
+.RegisterHeader{
+    min-height: 10vh;
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: center;
+    font-size: calc(10px + 2vmin);
+}
+.RegisterHeader {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+.RegisterHeader .underline-wrapper {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    position: relative;
+}
+
+.RegisterHeader .underline-wrapper::after {
+    content: "";
+    position: absolute;
+    left: 0;
+    bottom: 10px;
+    width: 100%;
+    height: 1px;
+    background: black;
+}
