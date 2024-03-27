@@ -1,0 +1,27 @@
+/* Styling for the ImageComponent */
+
+/* Flex container for image and input fields */
+div {
+    display: flex;
+    align-items: center;
+}
+
+/* Image styling */
+img {
+    max-width: 100px; /* Adjust as needed */
+    margin-right: 16px; /* Spacing between image and input fields */
+}
+
+/* Input field styling */
+input {
+    padding: 8px;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+    margin-bottom: 8px; /* Vertical spacing between input fields */
+}
+
+/* Label styling */
+label {
+    font-weight: bold;
+    margin-right: 8px; /* Spacing between label and input field */
+}

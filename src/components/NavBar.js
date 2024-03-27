@@ -1,9 +1,9 @@
 import React from 'react';
-
+import './NavBar.css';
 const NavBar = () => {
     return (
         <div style={{ display: 'flex', alignItems: 'center' }}>
-            <img src="/public/logo.png" alt="logo" style={{ width: '50px', height: '50px' }} />
+            <img src="/src/logo.svg" alt="logo" style={{ width: '50px', height: '50px' }} />
             <div>
                 <label htmlFor="fromCity">From</label>
                 <input type="text" id="fromCity" name="fromCity" placeholder="City"/>
