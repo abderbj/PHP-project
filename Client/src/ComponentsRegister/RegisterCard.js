@@ -28,10 +28,15 @@ function RegisterCard() {
 
     try {
       console.log(data);
-
-      const response = await axios.post(
+      const response = await fetch(
         "http://localhost/Srver%20rszbuy/Server/src/signup.php",
-        data
+        {
+          method: "POST",
+          headers: {
+            "Content-Type": "application/json",
+          },
+          body: JSON.stringify(data),
+        }
       );
       console.log(response);
       if (response.status === 200) {

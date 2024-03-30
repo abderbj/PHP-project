@@ -3,11 +3,11 @@
 echo("hellllo");
 include 'request.php';
 if ($_SERVER["REQUEST_METHOD"] == "POST") {
-
+    echo($_POST['firstName']);
     $requiredFields = ['firstName', 'lastName', 'phoneNumber', 'email', 'password'];
     foreach ($requiredFields as $field) {
         if (!isset($_POST[$field])) {
-            die("Required field '$field' is missing.");
+            echo("Required field '$field' is missing.");
         }
     }
     header('Access-Control-Allow-Origin: http://localhost:3000');
