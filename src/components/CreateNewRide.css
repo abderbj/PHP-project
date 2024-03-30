@@ -1,0 +1,102 @@
+/* CreateNewRide.css */
+
+
+/* Container for the entire form */
+.new-ride-form {
+    width: 75%;
+    max-width: 700px   ;
+    margin: 0 auto;
+    padding: 20px;
+    background-color: #f9f9f9;
+    border-radius: 8px;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+    display: inline-block;
+
+}
+
+
+
+/* Heading style */
+.new-ride-form h2 {
+    font-size: 24px;
+    margin-bottom: 16px;
+    color: #333;
+}
+
+/* Input field styling */
+.new-ride-form input[type="text"],
+.new-ride-form input[type="date"],
+.new-ride-form input[type="time"],
+.new-ride-form input[type="number"],
+.new-ride-form textarea {
+    width: 100%;
+    padding: 10px;
+    margin-bottom: 16px;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+    font-size: 14px;
+}
+
+.new-ride-form label {
+    display: block;
+    margin-bottom: 8px;
+    font-size: 16px;
+    color: #333;
+}
+.row {
+    display: flex;
+    justify-content: space-between;
+    /*make all the columns aligned*/
+    align-items: center;
+
+}
+/* Button style */
+.column{
+    width: 48%;
+    display: inline-block;
+    margin-right: 10px;
+
+
+
+}
+
+/* Avatar style */
+.new-ride-form .avatar {
+    display: flex;
+    align-items: center;
+    margin-top: 16px;
+}
+
+.new-ride-form .avatar img {
+    width: 40px;
+    height: 40px;
+    border-radius: 50%;
+    margin-right: 12px;
+}
+
+.new-ride-form .avatar span {
+    font-size: 14px;
+    color: #555;
+}
+
+/* Places available style */
+.new-ride-form .column-image {
+    display: inline-block;
+}
+/* Button styling */
+.new-ride-form button {
+    background-color: #4C4C4C;
+    color: white;
+    border: none;
+    padding: 10px 20px;
+    text-align: center;
+    display: inline-block;
+    font-size: 16px;
+    border-radius: 4px;
+    cursor: pointer;
+    transition: background-color 0.2s ease;
+}
+
+.new-ride-form button:hover{
+    background-color: #333; /* Darken on hover */
+}
