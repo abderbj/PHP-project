@@ -28,14 +28,16 @@ function RegisterCard() {
 
     try {
       console.log(data);
+
       const response = await axios.post(
-        "http://localhost/Server%20rszbuy/Server/src/signup.php",
+        "http://localhost/Srver%20rszbuy/Server/src/signup.php",
         data
       );
       console.log(response);
       if (response.status === 200) {
         console.log("User registered successfully");
-        window.location.href = "/login";
+        console.log(response.data);
+        // window.location.href = "/login";
       }
     } catch (error) {
       // display an error message saying email or password incorrect
