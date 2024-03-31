@@ -1,5 +1,6 @@
 import React, { useState } from 'react';
 import './CreateNewRide.css';
+import img from './cross.png';
 const CreateNewRide = () => {
     const [fromCity, setFromCity] = useState('');
     const [toCity, setToCity] = useState('');
@@ -14,8 +15,12 @@ const CreateNewRide = () => {
 
     return (
         <div className="new-ride-form">
+            <div className="row">
             <h2>Create New Ride</h2>
+            <img src={img} alt="cross" className="cross" />
+            </div>
             <form onSubmit={handleSubmit}>
+                <div className="h_line"></div>
                 <div className="row">
                     <div className="column">
                         <label htmlFor="fromCity">From</label>
@@ -27,7 +32,7 @@ const CreateNewRide = () => {
                                 placeholder="Enter starting city"
                             />
                     </div>
-                    <div className="column">
+                    <div className="column-right">
                         <label htmlFor="toCity">To</label>
                         <input
                             type="text"
@@ -57,7 +62,7 @@ const CreateNewRide = () => {
                             onChange={(e) => setTime(e.target.value)}
                         />
                     </div>
-                    <div className="column">
+                    <div className="column-right">
                         <label htmlFor="price">Price</label>
                         <input
                             type="number"
@@ -68,19 +73,21 @@ const CreateNewRide = () => {
                     </div>
                 </div>
                 <div className="row">
-                    <div className="column-image">
-                        <img  src="https://w7.pngwing.com/pngs/858/581/png-transparent-profile-icon-user-computer-icons-system-chinese-wind-title-column-miscellaneous-service-logo-thumbnail.png" alt="ride" />
-                        <label htmlFor="phone">34512322</label>
-                    </div>
-                    <div className="column">
-                        <label htmlFor="description">Description</label>
                         <textarea
                             id="description"
                             placeholder="description"
                         />
-                    </div>
                 </div>
+                <div className="h_line"></div>
+                <div className="row">
+                    <label htmlFor="seats">Seats</label>
+                    <input
+                        type="number"
+                        id="seats"
+                        className="seats"
+                    />
                 <button type="submit">Create</button>
+                </div>
             </form>
         </div>
     );
