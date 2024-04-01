@@ -32,6 +32,7 @@ CREATE TABLE `available_ride` (
   `driver` varchar(20) NOT NULL,
   `places` int(11) NOT NULL,
   `available_places` int(11) NOT NULL
+  
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 -- --------------------------------------------------------
@@ -47,18 +48,22 @@ CREATE TABLE `registration` (
   `phonenumber` int(100) NOT NULL,
   `email` varchar(255) NOT NULL,
   `password` varchar(100) NOT NULL,
+  `pfp_path` varchar(255) NOT NULL,
   `is_admin` tinyint(4) NOT NULL DEFAULT 0,
-  `activation_code` varchar(255) NOT NULL
+  `rating`  float(10) NOT NULL DEFAULT 0,
+  `nb_ratings` int(11) NOT NULL DEFAULT 0,
+  `activation_code` varchar(255) NOT NULL,
+  `joined_id` int(11)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 --
 -- Déchargement des données de la table `registration`
 --
 
-INSERT INTO `registration` (`id`, `firstname`, `lastname`, `phonenumber`, `email`, `password`, `is_admin`, `activation_code`) VALUES
-(1, '', 'majd', 546, 'majdoubsarah7@gmail.', '123', 0, ''),
-(3, '', 'majd', 546, 'sarramajdoub5@gmail.', '123', 0, ''),
-(7, 'amy', 'no', 15698, 'amyno@gmail.com', '123', 0, '');
+-- INSERT INTO `registration` (`id`, `firstname`, `lastname`, `phonenumber`, `email`, `password`, `is_admin`, `activation_code`) VALUES
+-- (1, '', 'majd', 546, 'majdoubsarah7@gmail.', '123', 0, ''),
+-- (3, '', 'majd', 546, 'sarramajdoub5@gmail.', '123', 0, ''),
+-- (7, 'amy', 'no', 15698, 'amyno@gmail.com', '123', 0, '');
 --
 -- Index pour les tables déchargées
 --
@@ -92,6 +97,7 @@ ALTER TABLE `available_ride`
 --
 ALTER TABLE `registration`
   MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=54;
+  ADD CONSTRAINT `ride_fk` FOREIGN KEY (`joined_id`) REFERENCES `available_ride` (`id`);
 
 --
 -- Contraintes pour les tables déchargées
