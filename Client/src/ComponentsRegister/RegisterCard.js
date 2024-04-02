@@ -145,8 +145,9 @@ function RegisterCard() {
             >
               Register
             </button>
-            <p className="login-link">
-              Returning user? <a href="/login">Log in here</a>
+            {false && <p className="login-link"> Returning user? <a href="/login">Log in here</a>
+            </p>}
+            <p className="login-link"> Returning user? <a href="/login">Log in here</a>
             </p>
           </form>
         </div>

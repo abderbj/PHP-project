@@ -72,11 +72,11 @@ function LoginCard() {
                 </div>
               </div>
             </div>
-            <button type="submit" id="LoginButton" className="btn btn-primary">
+            <button href="/frontpage" type="submit" id="LoginButton" className="btn btn-primary">
               Login
             </button>
             <p className="login-link">
-              Don't have an account ? <a href="/">Register here</a>
+              Don't have an account ? <a href="/register">Register here</a>
             </p>
           </form>
         </div>

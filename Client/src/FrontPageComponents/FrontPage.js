@@ -1,15 +1,14 @@
 import { Provider } from 'react-redux';
-import store from './store';
-import Offers from './components/Offers';
-import SideBar from './components/SideBar';
-import NavBar from "./components/NavBar";
+import Offers from './Offers';
+import SideBar from './SideBar';
+import NavBar from "./NavBar";
 function FrontPage() {
     return (
-        <Provider store={store}>
+        <div>
             <SideBar />
             <NavBar />
             <Offers />
-        </Provider>
+        </div>
     );
 }
 
