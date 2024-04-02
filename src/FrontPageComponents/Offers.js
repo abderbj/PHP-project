@@ -1,4 +1,5 @@
 import React, { useState ,useEffect} from 'react'
+import "../App.css";
 import {useSelector} from 'react-redux'
 import { Pagination } from 'antd';
 function Offers() {
@@ -53,8 +54,8 @@ function Offers() {
     }, [currentPage, offers]); 
 
     return (
-    <>
-    <table>
+    <div className='offers flex flex-col'>
+    <table className='tab'>
         <thead>
         <tr>
             <th>Name</th>
@@ -82,8 +83,8 @@ function Offers() {
             );
         })}
     </table>
-    <Pagination defaultCurrent={1} total={50} onChange={(page)=> setCurrentPage(page)}/>
-    </>
+    <Pagination defaultCurrent={1} total={50} onChange={(page)=> setCurrentPage(page)} className='pag'/>
+    </div>
     )
 }
 

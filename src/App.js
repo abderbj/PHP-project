@@ -9,7 +9,9 @@ import CreateNewRide from "./components/CreateNewRide";
 function App() {
   return (
     <Provider store={store}>
-      <CreateNewRide />
+      <SideBar />
+      <NavBar />
+      <Offers />   
     </Provider>
   );
 }

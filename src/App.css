@@ -42,3 +42,81 @@
 .slider{
   width: 20%
 }
+
+.add-btn{
+  background-color: #565E6D;
+  color: white;
+  padding: 10px;
+  width: 262px;
+  height: 43px;
+  border: none;
+  border-radius: 3px;
+  cursor: pointer;
+}
+.pricing{
+  position: relative;
+  right: 88px;
+}
+
+.min{
+  position: relative;
+  right: 37px;
+}
+.inp{
+  position: relative;
+  top: 4px;
+}
+.places{
+  margin-right: 135px;
+}
+.slid{
+  margin-right: 18px;
+}
+.review{
+  margin-right: 195px;
+}
+.stars{
+  margin-right: 140px;
+}
+.side-bar{
+  margin-top: 90px;
+}
+.offers{
+  position: relative;
+  right: 650px;
+}
+.tab{
+  width: 1200px;
+  position: relative;
+  right: 250px;
+}
+
+
+@media screen and (max-width: 1200px) {
+  .tab {
+    width: 800px;
+    position: relative;
+    right: 250px;
+  }
+}
+
+@media screen and (max-width: 800px) {
+  .tab {
+    width: 600px;
+    position: relative;
+    right: 250px;
+  }
+}
+
+
+@media screen and (max-width: 500px) {
+  .tab {
+    width: 300px;
+    position: relative;
+    right: 250px;
+  }
+}
+.pag{
+  position: relative;
+  right: 230px;
+}
