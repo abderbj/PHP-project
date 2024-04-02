@@ -1,18 +1,17 @@
-import logo from './logo.svg';
-import './App.css';
-import { Provider } from 'react-redux';
-import store from './store';
-import Offers from './components/Offers';
-import SideBar from './components/SideBar';
-import NavBar from "./components/NavBar";
-import CreateNewRide from "./components/CreateNewRide";
+// App.js
+import React from 'react';
+import { BrowserRouter as Router, Route, Routes } from 'react-router-dom';
+import Register from './ComponentsRegister/Register.js';
+import Login from './ComponentsLogin/Login.js';
+
 function App() {
   return (
-    <Provider store={store}>
-      <SideBar />
-      <NavBar />
-      <Offers />   
-    </Provider>
+    <Router>
+      <Routes>
+        <Route path="/" element={<Register />} />
+        <Route path="/login" element={<Login />} />
+      </Routes>
+    </Router>
   );
 }
 
