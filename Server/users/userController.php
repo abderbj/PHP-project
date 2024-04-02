@@ -3,8 +3,9 @@
 include 'utils/controller.php';
 include 'user.php';
 class UserController extends Controller {
+
     public function __construct() {
-        parent::__construct("$this->table");
+        parent::__construct("users");
     }
     /**
      * Get all $this->table
@@ -19,8 +20,7 @@ class UserController extends Controller {
         $result = $this->db->query($query);
         $results = array();
         while ($row = $result->fetch_assoc()) {
-            $user = new User($row['first_name'], $row['last_name'], $row['telephone_number'], $row['rating'], $row['email']);
-            $results[] = $user;
+            $results[] = $row;
         }
         return $results;
     }
@@ -74,13 +74,15 @@ class UserController extends Controller {
             echo json_encode("You are already logged in, please logout first");
             return false;
         }
-        $sql = "select password from registration where email='$email' ";
+        $sql = "select password, is_admin from registration where email='$email' ";
         $result = $this->db->query($sql);
         if ($result) {
             if ($result->num_rows > 0) {
                 $row = $result->fetch_assoc();
                 if (password_verify($password, $row['password'])) {
-                    echo json_encode(array("message"=>"Login successful"));
+
+                    echo json_encode(array("message"=>"Login successful",
+                                           "is_admin"=>$row['is_admin']));
                     $_SESSION['user_id'] = $row['id'];
                     return true;
                 } else {
@@ -164,12 +166,12 @@ class UserController extends Controller {
      * @return array
      */
     public function getAll($sortedBy = "firstname", $where = "TRUE", $having = "TRUE") {
-        $query = "SELECT u.id, u.firstname, u.lastname, u.phonenumber, u.email, u.rating, COUNT(DISTINCT cr.id) AS created_rides, COUNT(DISTINCT jr.id) AS joined_rides
+        $query = "SELECT u.id, u.firstname, u.lastname, u.phonenumber, u.email, u.rating, u.pfp_path, COUNT(DISTINCT cr.id) AS created_rides, COUNT(DISTINCT jr.id) AS joined_rides
                   FROM $this->table u
                   LEFT JOIN rides cr ON u.id = cr.driver
                   LEFT JOIN rides jr ON u.id = jr.joined_id
                   WHERE $where
-                  GROUP BY u.id, u.firstname, u.lastname, u.phonenumber, u.email, u.rating;
+                  GROUP BY u.id, u.firstname, u.lastname, u.phonenumber, u.email, u.rating, u.pfp_path;
                   HAVING $having
                   ORDER BY $sortedBy ASC";
         $result = $this->db->query($query);
@@ -179,4 +181,55 @@ class UserController extends Controller {
         }
         return $results;
     }
-}  
+    /**
+     * Rate user
+     * @param int $id
+     * @param int $rating
+     * @return boolean
+     */
+    public function rate($id,$rating){
+        if(session_status() == PHP_SESSION_NONE){
+            echo json_encode(array("message"=> "You are not logged in, please login first"));
+            return false;
+        }
+        $sql = "SELECT rating, nb_ratings FROM $this->table WHERE id=$id";
+        $result = $this->db->query($sql);
+        if ($result) {
+            $row = $result->fetch_assoc();
+            $new_rating = ($row['rating'] * $row['nb_ratings'] + $rating) / ($row['nb_ratings'] + 1);
+            $sql = "UPDATE $this->table SET rating=$new_rating, nb_ratings=nb_ratings+1 WHERE id=$id";
+            $result = $this->db->query($sql);
+            if ($result) {
+                echo json_encode(array("message"=>"User rated successfully"));
+                return true;
+            } else {
+                echo json_encode(array("message"=>"Failed to rate user"));
+                return false;
+            }
+        } else {
+            echo json_encode(array("message"=>"User not found"));
+            return false;
+        }
+    }
+    /**
+     * join ride
+     * @param int $ride_id
+     * @return boolean
+     */
+    public function joinRide($ride_id){
+        if(session_status() == PHP_SESSION_NONE){
+            echo json_encode(array("message"=> "You are not logged in, please login first"));
+            return false;
+        }
+        $user_id = $_SESSION['user_id'];
+        $sql = "INSERT INTO joined_rides (user_id, ride_id) VALUES ($user_id, $ride_id)";
+        $result = $this->db->query($sql);
+        if ($result) {
+            echo json_encode(array("message"=>"Ride joined successfully"));
+            return true;
+        } else {
+            echo json_encode(array("message"=>"Failed to join ride"));
+            return false;
+        }
+    }
+}   
