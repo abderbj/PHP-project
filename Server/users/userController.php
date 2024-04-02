@@ -4,18 +4,18 @@ include 'utils/controller.php';
 include 'user.php';
 class UserController extends Controller {
     public function __construct() {
-        parent::__construct();
+        parent::__construct("$this->table");
     }
     /**
-     * Get all users
+     * Get all $this->table
      * @param string $name
      * @param string $sorted (name of the column to sort by)
-     * @param string $filter (SQL WHERE clause)
+     * @param string $where (SQL WHERE clause)
      * @return array
      * 
      */
-    public function findByName($name, $sorted = "firstname", $filter="TRUE") {
-        $query = "SELECT * FROM users WHERE (first_name LIKE '%$name%' OR last_name LIKE '%$name%')AND $filter ORDER BY $sorted ASC";
+    public function findByName($name, $sorted = "firstname", $where="TRUE") {
+        $query = "SELECT * FROM $this->table WHERE (first_name LIKE '%$name%' OR last_name LIKE '%$name%')AND $where ORDER BY $sorted ASC";
         $result = $this->db->query($query);
         $results = array();
         while ($row = $result->fetch_assoc()) {
@@ -106,11 +106,11 @@ class UserController extends Controller {
         header("location:login.php");
     }
     /**
-     * Get number of users
+     * Get number of $this->table
      * @return int
      */
     public function count() {
-        $query = "SELECT COUNT(*) as total FROM users";
+        $query = "SELECT COUNT(*) as total FROM $this->table";
         $result = $this->db->query($query);
         $row = $result->fetch_assoc();
         return $row['total'];
@@ -121,7 +121,7 @@ class UserController extends Controller {
      * @return boolean
      */
     public function delete($id) {
-        $sql = "DELETE FROM users WHERE id=$id";
+        $sql = "DELETE FROM $this->table WHERE id=$id";
         $result = $this->db->query($sql);
         if ($result) {
             echo json_encode(array("message"=>"User deleted successfully"));
@@ -137,13 +137,13 @@ class UserController extends Controller {
      * @return void
      */
     public function report($id) {
-        $sql = "SELECT * FROM users WHERE id=$id ORDER BY firstname ASC";
+        $sql = "SELECT * FROM $this->table WHERE id=$id ORDER BY firstname ASC";
         $reporter_id = $_SESSION['user_id'];
         $result = $this->db->query($sql);
         if ($result["rating"] <= 1 and $result["nb_ratings"] > 2) {
             $name = $result["firstname"] . " " . $result["lastname"];
-            $sender = $this->db->query("SELECT email FROM users WHERE id=$reporter_id")["email"];
-            $to = $this->db->query("SELECT email FROM users WHERE is_admin=1")["email"];
+            $sender = $this->db->query("SELECT email FROM $this->table WHERE id=$reporter_id")["email"];
+            $to = $this->db->query("SELECT email FROM $this->table WHERE is_admin=1")["email"];
             $subject = "User Report";
             $message = "User $name with ID $id has been reported. Please take appropriate action.";
             $headers = "From: $sender" . "\r\n" .
@@ -155,5 +155,28 @@ class UserController extends Controller {
                 echo json_encode(array("message" => "Failed to send report"));
             }
         }
+    }
+    /**
+     * Get user table with number of joined and created rides
+     * @param string $sortedBy (name of the column to sort by)
+     * @param string $where (SQL WHERE clause)
+     * @param string $having (SQL HAVING clause)
+     * @return array
+     */
+    public function getAll($sortedBy = "firstname", $where = "TRUE", $having = "TRUE") {
+        $query = "SELECT u.id, u.firstname, u.lastname, u.phonenumber, u.email, u.rating, COUNT(DISTINCT cr.id) AS created_rides, COUNT(DISTINCT jr.id) AS joined_rides
+                  FROM $this->table u
+                  LEFT JOIN rides cr ON u.id = cr.driver
+                  LEFT JOIN rides jr ON u.id = jr.joined_id
+                  WHERE $where
+                  GROUP BY u.id, u.firstname, u.lastname, u.phonenumber, u.email, u.rating;
+                  HAVING $having
+                  ORDER BY $sortedBy ASC";
+        $result = $this->db->query($query);
+        $results = array();
+        while ($row = $result->fetch_assoc()) {
+            $results[] = $row;
+        }
+        return $results;
     }
 }  
