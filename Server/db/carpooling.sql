@@ -29,7 +29,6 @@ SET time_zone = "+00:00";
 
 CREATE TABLE `rides` (
   `id` int(11) NOT NULL,
-  `driver` varchar(20) NOT NULL,
   `places` int(11) NOT NULL,
   `departure` varchar(255) NOT NULL,
   `arrival` varchar(255) NOT NULL,
@@ -57,7 +56,8 @@ CREATE TABLE `users` (
   `rating`  float(10) NOT NULL DEFAULT 0,
   `nb_ratings` int(11) NOT NULL DEFAULT 0,
   `activation_code` varchar(255) NOT NULL,
-  `joined_id` int(11)
+  `joined_id` int(11),
+  `driving_id` int(11)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 --
@@ -77,7 +77,6 @@ CREATE TABLE `users` (
 --
 ALTER TABLE `rides`
   ADD PRIMARY KEY (`id`),
-  ADD KEY `driver_fk` (`driver`);
 
 --
 -- Index pour la table `users`
@@ -101,18 +100,14 @@ ALTER TABLE `rides`
 --
 ALTER TABLE `users`
   MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=54;
-  ADD CONSTRAINT `ride_fk` FOREIGN KEY (`joined_id`) REFERENCES `rides` (`id`);
+  ADD CONSTRAINT `rider_fk` FOREIGN KEY (`joined_id`) REFERENCES `rides` (`id`);
+  ADD CONSTRAINT `driver_fk` FOREIGN KEY (`driving_id`) REFERENCES `rides` (`id`);
 
 --
 -- Contraintes pour les tables déchargées
 --
 
---
--- Contraintes pour la table `rides`
---
-ALTER TABLE `rides`
-  ADD CONSTRAINT `driver_fk` FOREIGN KEY (`driver`) REFERENCES `users` (`id`);
-COMMIT;
+
 
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
 /*!40101 SET CHARACTER_SET_RESULTS=@OLD_CHARACTER_SET_RESULTS */;
