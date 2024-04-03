@@ -28,16 +28,19 @@ function RegisterCard() {
 
     try {
       console.log(data);
-      const response = await fetch("http://localhost/signup.php", {
-        method: "POST",
-        headers: {
-          "Content-Type": "application/json",
-        },
-        body: JSON.stringify(data),
-      });
+      const response = await fetch(
+        "http://localhost/Srver%20rszbuy/Server/users/signup.php",
+        {
+          method: "POST",
+          headers: {
+            "Content-Type": "application/json",
+          },
+          body: JSON.stringify(data),
+        }
+      );
       console.log(response);
       if (response.status === 200) {
-       // console.log("User registered successfully");
+        // console.log("User registered successfully");
         //window.location.href = "/login";
       }
     } catch (error) {
