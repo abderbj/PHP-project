@@ -18,25 +18,18 @@ function RegisterCard() {
   const handleSubmit = async (event) => {
     event.preventDefault();
 
-    const data = {
-      firstName,
-      lastName,
-      phoneNumber,
-      email,
-      password,
-    };
+    const data = new FormData();
+    data.append("firstName", firstName);
+    data.append("lastName", lastName);
+    data.append("phoneNumber", phoneNumber);
+    data.append("email", email);
+    data.append("password", password);
 
     try {
       console.log(data);
-      const response = await fetch(
+      const response = await axios.post(
         "http://localhost/Srver%20rszbuy/Server/src/signup.php",
-        {
-          method: "POST",
-          headers: {
-            "Content-Type": "application/json",
-          },
-          body: JSON.stringify(data),
-        }
+        data
       );
       console.log(response);
       if (response.status === 200) {
