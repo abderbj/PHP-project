@@ -27,6 +27,7 @@ SET time_zone = "+00:00";
 -- Structure de la table `rides`
 --
 
+
 CREATE TABLE `rides` (
   `id` int(11) NOT NULL,
   `places` int(11) NOT NULL,
@@ -51,13 +52,12 @@ CREATE TABLE `users` (
   `phonenumber` int(100) NOT NULL,
   `email` varchar(255) NOT NULL,
   `password` varchar(100) NOT NULL,
-  `pfp_path` varchar(255) NOT NULL,
+  `pfp_path` varchar(255) NOT NULL DEFAULT 'im/default.jpeg',
   `is_admin` tinyint(4) NOT NULL DEFAULT 0,
   `rating`  float(10) NOT NULL DEFAULT 0,
   `nb_ratings` int(11) NOT NULL DEFAULT 0,
-  `activation_code` varchar(255) NOT NULL,
-  `joined_id` int(11),
-  `driving_id` int(11)
+  `joined_id` int(11) DEFAULT NULL,
+  `driving_id` int(11)DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 --
@@ -76,7 +76,7 @@ CREATE TABLE `users` (
 -- Index pour la table `rides`
 --
 ALTER TABLE `rides`
-  ADD PRIMARY KEY (`id`),
+  ADD PRIMARY KEY (`id`);
 
 --
 -- Index pour la table `users`
@@ -99,8 +99,8 @@ ALTER TABLE `rides`
 -- AUTO_INCREMENT pour la table `users`
 --
 ALTER TABLE `users`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=54;
-  ADD CONSTRAINT `rider_fk` FOREIGN KEY (`joined_id`) REFERENCES `rides` (`id`);
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=54,
+  ADD CONSTRAINT `rider_fk` FOREIGN KEY (`joined_id`) REFERENCES `rides` (`id`),
   ADD CONSTRAINT `driver_fk` FOREIGN KEY (`driving_id`) REFERENCES `rides` (`id`);
 
 --

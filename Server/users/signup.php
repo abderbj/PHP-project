@@ -1,6 +1,7 @@
 <?php
 
 echo("hellllo");
+echo json_encode(array("message"=>"User already d5alt"));
 include 'request.php';
 if ($_SERVER["REQUEST_METHOD"] == "POST") {
     echo($_POST['firstName']);
@@ -32,20 +33,22 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
     $password_hash = password_hash($password, PASSWORD_DEFAULT);
     $verificationCode = mt_rand(100000, 999999);
 
-    $sql = "select * from registration where email='$email' ";
+    $sql = "select * from users where email='$email' ";
     $result = $mysqli->query($sql);
     if ($result) {
         if ($result->num_rows > 0) {
-            echo '<div class="alert alert-danger alert-dismissible fade show" role="alert">
-                    Email already exists.
-                    <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
-                </div>';
+            echo json_encode(array("message"=>"User already exists"));
         } else {
             echo json_encode(array("message"=>"User created successfully"));
-            $sql = "INSERT INTO `registration` (firstname, lastname, phonenumber, email, password, activation_code) 
-                    VALUES ('$firstname', '$lastname', '$phoneNumber', '$email', '$password_hash', '$verificationCode')";
+            echo json_encode(array("message"=>"User already exists2"));
+
+            $sql = "INSERT INTO `users` (firstname, lastname, phonenumber, email, password) 
+                    VALUES ('$firstname', '$lastname', '$phoneNumber', '$email', '$password_hash')";
+            echo json_encode(array("message"=>"User already exists3"));
 
             $mysqli->query($sql);
+            echo json_encode(array("message"=>"User already 5edmet"));
+
             $message = "Registration successful. Please login to continue.";
             header("location:login.php?message=" . urlencode($message));
 
