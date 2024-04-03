@@ -28,7 +28,7 @@ function RegisterCard() {
     try {
       console.log(data);
       const response = await axios.post(
-        "http://localhost/Srver%20rszbuy/Server/users/signup.php",
+        "http://localhost/Server/users/signup.php",
         data
       );
       console.log(response);
