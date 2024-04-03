@@ -105,7 +105,7 @@ class UserController extends Controller {
     public function logout() {
         session_start();
         session_destroy();
-        header("location:login.php");
+        // header("location:login.php");
     }
     /**
      * Get number of $this->table
