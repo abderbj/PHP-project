@@ -3,7 +3,7 @@ import { AiOutlineEye, AiOutlineEyeInvisible } from "react-icons/ai";
 import "./RegisterCard.css";
 import axios from "axios";
 
-function RegisterCard() {
+function RegisterCard({ image }) {
   const [showPassword, setShowPassword] = useState(false);
   const [firstName, setFirstName] = useState("");
   const [lastName, setLastName] = useState("");
@@ -24,7 +24,8 @@ function RegisterCard() {
     data.append("phoneNumber", phoneNumber);
     data.append("email", email);
     data.append("password", password);
-
+    console.log(image);
+    data.append("image", image);
     try {
       console.log(data);
       const response = await axios.post(
@@ -34,10 +35,9 @@ function RegisterCard() {
       console.log(response);
       if (response.status === 200) {
         console.log("User registered successfully");
-        //window.location.href = "/login";
+       // window.location.href = "/login";
       }
     } catch (error) {
-      // display an error message saying email or password incorrect
       console.error(error);
     }
   };
@@ -149,5 +149,4 @@ function RegisterCard() {
     </div>
   );
 }
-
 export default RegisterCard;

@@ -22,8 +22,16 @@
     content: "";
     position: absolute;
     left: 0;
-    bottom: 10px;
+    bottom: 25px;
     width: 100%;
     height: 1px;
     background: black;
+}
+.carImage {
+    width: 100px; 
+    height: 100px; 
+}
+.text {
+    padding-left: 10px;
+    font-size: 70px;
 }
