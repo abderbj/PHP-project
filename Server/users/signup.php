@@ -1,8 +1,12 @@
 <?php
 
-echo("hellllo");
+header("Access-Control-Allow-Origin: *");
+header('Access-Control-Allow-Methods: GET, POST, PUT, DELETE, OPTIONS');
+header('Access-Control-Allow-Headers: Content-Type, Authorization');
+header('Access-Control-Allow-Credentials: true');
+header('Content-Type: application/json');
+
 echo json_encode(array("message"=>"User already d5alt"));
-include 'request.php';
 if ($_SERVER["REQUEST_METHOD"] == "POST") {
     echo($_POST['firstName']);
     $requiredFields = ['firstName', 'lastName', 'phoneNumber', 'email', 'password'];
@@ -11,7 +15,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
             echo("Required field '$field' is missing.");
         }
     }
-    header('Access-Control-Allow-Origin: http://localhost:3000');
+    // header('Access-Control-Allow-Origin: http://localhost:3000');
 
     require 'dbConnect.php';
     $firstname = $_POST['firstName'];
@@ -20,18 +24,18 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
     $email = $_POST['email'];
     $password = $_POST['password'];
 
-    echo($email);
-    echo($password);
-    echo($firstname);
-    echo($lastname);
-    echo($phoneNumber);
+    // echo($email);
+    // echo($password);
+    // echo($firstname);
+    // echo($lastname);
+    // echo($phoneNumber);
 
     if (!filter_var($email, FILTER_VALIDATE_EMAIL)) {
-        die("Invalid email format");
+        echo json_encode(array('message'=> 'Invalid email address'));
     }
 
     $password_hash = password_hash($password, PASSWORD_DEFAULT);
-    $verificationCode = mt_rand(100000, 999999);
+    // $verificationCode = mt_rand(100000, 999999);
 
     $sql = "select * from users where email='$email' ";
     $result = $mysqli->query($sql);
@@ -50,7 +54,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
             echo json_encode(array("message"=>"User already 5edmet"));
 
             $message = "Registration successful. Please login to continue.";
-            header("location:login.php?message=" . urlencode($message));
+            // header("location:login.php?message=" . urlencode($message));
 
             exit();
         }
