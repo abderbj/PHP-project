@@ -54,10 +54,8 @@
   cursor: pointer;
 }
 .pricing{
-  position: relative;
-  right: 88px;
+  font-weight: bold;
 }
-
 .min{
   position: relative;
   right: 37px;
@@ -68,25 +66,25 @@
 }
 .places{
   margin-right: 135px;
+  font-weight: bold;
 }
 .slid{
   margin-right: 18px;
 }
 .review{
   margin-right: 195px;
-}
-.stars{
-  margin-right: 140px;
+  font-weight: bold;
 }
 .side-bar{
   margin-top: 90px;
 }
 .offers{
   position: relative;
-  right: 650px;
+  left: 600px;
+  bottom: 450px;
 }
 .tab{
-  width: 1200px;
+  width: 1150px;
   position: relative;
   right: 250px;
 }
@@ -118,5 +116,10 @@
 }
 .pag{
   position: relative;
-  right: 230px;
+  margin-top: 10px ;
+  left: 150px;
+}
+.star{
+  position: relative;
+  top: 6px;
 }

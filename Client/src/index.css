@@ -32,14 +32,23 @@ th {
 
 /* Style table data cells */
 td {
-    padding: 13px;
-    border-bottom: 1px solid #ddd;
+  padding: 13px;
+  border-bottom: 1px solid #ddd;
+}
+
+tr:hover {
+  background-color: #f1f1f1;
 }
 
 /* Add alternating row background color */
 tr:nth-child(even) {
-    background-color: #f9f9f9;
+    background-color: white;
 }
+
+tr:nth-child(even):hover {
+    background-color: #f2f2f2;
+}
+
 .custom-slider {
   width: 300px; /* Adjust the width as needed */
 }

@@ -42,7 +42,7 @@ function RegisterCard({ image }) {
       console.log(response);
       if (response.status === 200) {
         console.log("User registered successfully");
-        //window.location.href = "/login";
+        window.location.href = "/login";
       }
     } catch (error) {
       console.error(error);

@@ -1,20 +1,18 @@
-/*
-/* Flex container for image and input fields */
 .navbar-div {
     display: flex;
-    align-items: center;
+    margin-right: 10px;
 }
 
 .nav-bar-img {
-    max-width: 100px; /* Adjust as needed */
-    margin-right: 16px; /* Spacing between image and input fields */
+    max-width: 100px; 
+    margin-right: 16px; 
 }
 
 .nav-bar-input {
     padding: 8px;
     border: 1px solid #ccc;
-    border-radius: 4px;
-    margin-bottom: 8px; /* Vertical spacing between input fields */
+    border-radius: 5px;
+    margin-bottom: 8px;
 }
 
 .nav-bar-label {
@@ -22,7 +20,12 @@
     margin-right: 8px; /* Spacing between label and input field */
 }
 .nav-bar{
+    display: flex;
+    align-items: center;
+    gap: 40px;
+    width: 100%;
+    background-color: #DEE1E6;
+    height : 77px;
     position: relative;
-    bottom: 200px;
-    right: 370px;
+    bottom: 470px;
 }
