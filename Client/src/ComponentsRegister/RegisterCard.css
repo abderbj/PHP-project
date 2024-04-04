@@ -86,3 +86,11 @@
 .login-link a:hover {
     text-decoration: underline;
 }
+.error-message {
+    color: red;
+    background-color: #ffe6e6;
+    padding: 10px;
+    margin-bottom: 20px;
+    border-radius: 5px;
+    display: none;
+  }

@@ -1,7 +1,7 @@
 import React, { useState, useRef } from 'react';
 import icon from './profileicon.PNG';
-
-function ProfileCard() {
+import './ProfileCard.css';
+function ProfileCard({ setImage }) {
     const [selectedImage, setSelectedImage] = useState(icon);
     const fileInputRef = useRef();
     const imageRef = useRef();
@@ -17,7 +17,9 @@ function ProfileCard() {
                     canvas.width = imageRef.current.width;
                     canvas.height = imageRef.current.height;
                     ctx.drawImage(img, 0, 0, canvas.width, canvas.height);
-                    setSelectedImage(canvas.toDataURL());
+                    const newImage = canvas.toDataURL();
+                    setSelectedImage(newImage);
+                    setImage(newImage); // Set image in parent component
                 };
                 img.src = e.target.result;
             };
@@ -31,9 +33,9 @@ function ProfileCard() {
 
     return (
         <div>
-            <h1>Profile Picture</h1>
+            <h1 className="profile-pic-sentence">Profile Picture</h1>
             <img ref={imageRef} src={selectedImage} alt="Avatar" className="avatar" onClick={handleImageClick} />
-            <input type="file" onChange={handleImageChange} ref={fileInputRef} style={{display: 'none'}} />
+            <input type="file" accept="image/*" onChange={handleImageChange} ref={fileInputRef} style={{display: 'none'}} />
         </div>
     );
 }

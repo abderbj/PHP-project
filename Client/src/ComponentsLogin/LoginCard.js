@@ -1,7 +1,7 @@
 import { AiOutlineEye, AiOutlineEyeInvisible } from "react-icons/ai";
 import React, { useState } from "react";
 import "./LoginCard.css";
-// import axios from 'axios';
+import axios from "axios";
 function LoginCard() {
   const [showPassword, setShowPassword] = useState(false);
   const [email, setEmail] = useState("");
@@ -12,24 +12,36 @@ function LoginCard() {
 
   const handleSubmit = async (event) => {
     event.preventDefault();
-
-    const data = {
-      email,
-      password,
-    };
-
+    if (!email || !password) {
+      alert("All fields must be filled out");
+      return;
+    }
+    const data = new FormData();
+    data.append("email", email);
+    data.append("password", password);
     try {
       console.log(data);
-      const response = await fetch("http://localhost/login.php", {
-        method: "POST",
-        headers: {
-          "Content-Type": "application/json",
-        },
-        body: JSON.stringify(data),
-      });
-      console.log(response.data);
+      const response = await axios.post(
+        "http://localhost/Server/users/login.php",
+        data
+      );
+      console.log(response);
+      if (response.status === 200) {
+        console.log("User logged in  successfully");
+        if (response.data.isAdmin) {
+          window.location.href = "/admin";
+      } else {
+          window.location.href = "/frontpage";
+      }
+      }
+      
     } catch (error) {
-      console.error(error);
+      console.log(error);
+      if (error.response.status === 401) {
+        alert("Invalid email or password");        
+      }
+     
+      
     }
   };
   return (
@@ -72,11 +84,11 @@ function LoginCard() {
                 </div>
               </div>
             </div>
-            <button href="/frontpage" type="submit" id="LoginButton" className="btn btn-primary">
+            <button  type="submit" id="LoginButton" className="btn btn-primary">
               Login
             </button>
             <p className="login-link">
-              Don't have an account ? <a href="/register">Register here</a>
+              Don't have an account ? <a href="/">Register here</a>
             </p>
           </form>
         </div>

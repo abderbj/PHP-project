@@ -1,4 +1,3 @@
-import { Provider } from 'react-redux';
 import Offers from './Offers';
 import SideBar from './SideBar';
 import NavBar from "./NavBar";

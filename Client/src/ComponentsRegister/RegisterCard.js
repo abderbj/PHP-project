@@ -3,7 +3,7 @@ import { AiOutlineEye, AiOutlineEyeInvisible } from "react-icons/ai";
 import "./RegisterCard.css";
 import axios from "axios";
 
-function RegisterCard() {
+function RegisterCard({ image }) {
   const [showPassword, setShowPassword] = useState(false);
   const [firstName, setFirstName] = useState("");
   const [lastName, setLastName] = useState("");
@@ -17,41 +17,47 @@ function RegisterCard() {
 
   const handleSubmit = async (event) => {
     event.preventDefault();
+    if (!firstName || !lastName || !phoneNumber || !email || !password) {
+      alert('All fields must be filled out');
+      return;
+    }
+    
 
-    const data = {
-      firstName,
-      lastName,
-      phoneNumber,
-      email,
-      password,
-    };
-
+    const data = new FormData();
+    data.append("firstName", firstName);
+    data.append("lastName", lastName);
+    data.append("phoneNumber", phoneNumber);
+    data.append("email", email);
+    data.append("password", password);
+    console.log(image);
+    if(image != null){
+    data.append("image", image);
+    }
     try {
       console.log(data);
-      const response = await fetch("http://localhost/signup.php", {
-        method: "POST",
-        headers: {
-          "Content-Type": "application/json",
-        },
-        body: JSON.stringify(data),
-      });
+      const response = await axios.post(
+        "http://localhost/Server/users/signup.php",
+        data
+      );
       console.log(response);
       if (response.status === 200) {
         console.log("User registered successfully");
-        console.log(response.data);
-        window.location.href = "/login";
+        //window.location.href = "/login";
       }
     } catch (error) {
-      // display an error message saying email or password incorrect
       console.error(error);
+      alert("An error occurred. Please try again later.");
+      return;
     }
   };
 
   return (
+    
     <div className="RegisterCardContainer">
       <div className="card">
         <div className="card-body">
           <h5 className="card-title">Begin your journey</h5>
+          
           <form onSubmit={handleSubmit}>
             <div className="name-group">
               <div className="form-group">
@@ -145,9 +151,8 @@ function RegisterCard() {
             >
               Register
             </button>
-            {false && <p className="login-link"> Returning user? <a href="/login">Log in here</a>
-            </p>}
-            <p className="login-link"> Returning user? <a href="/login">Log in here</a>
+            <p className="login-link">
+              Returning user? <a href="/login">Log in here</a>
             </p>
           </form>
         </div>
@@ -155,5 +160,4 @@ function RegisterCard() {
     </div>
   );
 }
-
 export default RegisterCard;
