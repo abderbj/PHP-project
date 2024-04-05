@@ -1,0 +1,53 @@
+.users{
+  position: relative;
+  left: 600px;
+  bottom: 450px;
+}
+
+.tab-admin{
+  width: 1150px;
+  position: relative;
+  right: 250px;
+  margin-top: 200px;
+}
+
+.pag-admin{
+  position: relative;
+  margin-top: 10px ;
+  left: 150px;
+}
+
+table {
+    width: 100%;
+    border-collapse: collapse;
+    font-family: Arial, sans-serif;
+}
+
+th {
+    background-color: #f2f2f2;
+    text-align: left;
+    padding: 10px;
+    font-weight: bold;
+    border-bottom: 1px solid #ddd;
+}
+
+td {
+  padding: 13px;
+  border-bottom: 1px solid #ddd;
+}
+
+tr:hover {
+  background-color: #f1f1f1;
+}
+
+tr:nth-child(even) {
+    background-color: white;
+}
+
+tr:nth-child(even):hover {
+    background-color: #f2f2f2;
+}
+
+.custom-slider {
+  width: 300px; 
+}

@@ -1,0 +1,35 @@
+.nav-bar-admin{
+    gap: 40px;
+    width: 100%;
+    background-color: #DEE1E6;
+    height : 73px;
+}
+
+.nav-bar-label-admin {
+    font-weight: bold;
+    margin-right: 8px;
+}
+
+.nav-bar-img-admin {
+    margin-right: 16px; 
+}
+
+.navbar-div-admin {
+    display: flex;
+    margin-right: 10px;
+    position: relative;
+    left: 130px;
+    top: 7px;
+}
+
+.navbar-input-admin {
+    padding: 8px;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+    margin-bottom: 8px;
+    width: 357px;
+    height: 35px;
+    
+}
+
+

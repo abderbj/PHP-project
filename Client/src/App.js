@@ -4,9 +4,9 @@ import { BrowserRouter as Router, Route, Routes } from 'react-router-dom';
 import Register from './ComponentsRegister/Register.js';
 import Login from './ComponentsLogin/Login.js';
 import FrontPage from './FrontPageComponents/FrontPage.js';
+import AdminDashbord from './AdminDashbordComponents/AdminDashbord.js';
 import store from './store';
 import { Provider } from 'react-redux';
-
 function App() {
     return (
       <Provider store={store}>
@@ -15,7 +15,7 @@ function App() {
                 <Route path="/" element={<Register />} />
                 <Route path="/login" element={<Login />} />
                 <Route path="/frontpage" element={<FrontPage/>} />
-                <Route path="/admin" element={<h1>ADMIN DASHBOARD</h1>}/>
+                <Route path="/admin" element={<AdminDashbord />}/>
             </Routes>
         </Router>
         </Provider>

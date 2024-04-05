@@ -17,7 +17,7 @@
 
 .nav-bar-label {
     font-weight: bold;
-    margin-right: 8px; /* Spacing between label and input field */
+    margin-right: 8px;
 }
 .nav-bar{
     display: flex;
