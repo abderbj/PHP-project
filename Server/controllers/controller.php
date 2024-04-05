@@ -8,7 +8,7 @@ abstract class Controller {
 
     public function __construct($table) {
         // Connect to the database
-        include 'db/dbConnect.php';
+        include 'dbConnect.php';
         $this->db = $mysqli;
         if (mysqli_connect_errno()) {
             die("Failed to connect to MySQL: " . mysqli_connect_error());
@@ -29,9 +29,12 @@ abstract class Controller {
     public function addWhere($where) {
         $this->where .= " AND $where";
     }
-
+    /**
+     * Set the orderBy clause
+     * @param string $orderBy (MUST HAVE ASC OR DESC AT THE END)
+     */
     public function setOrderBy($orderBy) {
-        $this->orderBy = $orderBy + " ASC";
+        $this->orderBy = $orderBy;
     }
     /**
      * Toggle the order of the orderBy clause (ASC to DESC or vice versa)
