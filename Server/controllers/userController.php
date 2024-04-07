@@ -77,7 +77,10 @@ class UserController extends Controller {
                 if (password_verify($password, $row['password'])) {
                     
                     echo json_encode(array("message"=>"Login successful",
-                    "is_admin"=>$row['is_admin']));
+                    "is_admin"=>$row['is_admin'],
+                    "firstName"=>$row['firstname'],
+                    "lastName"=>$row['lastname'],
+                    "pfp"=> base64_encode(file_get_contents($row['pfp_path']))));
                     $_SESSION['user_id'] = $row['id'];
                     return true;
                 } else {

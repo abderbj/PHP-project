@@ -19,7 +19,7 @@ abstract class Controller {
     }
     /**
      * Get all rows from a table
-     * @return array
+     * @return void
      */
     abstract function getAll();
 
