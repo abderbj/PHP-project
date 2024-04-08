@@ -46,11 +46,11 @@ else if($action === "getAllUsers"){
 else if($action === "report"){
     $userController->report($_POST['id']);
 }
-else if($action === "delete"){
+else if($action === "deleteUser"){
     $userController->delete($_POST['id']);
 }
 else if($action === "rate"){
-    $userController->delete($_POST["id"], $_POST["rating"]);
+    $userController->rate($_POST["id"], $_POST["rating"]);
 }
 else if($action === "joinRide"){
     $userController->joinRide($_POST["rideId"]);

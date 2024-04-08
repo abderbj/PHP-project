@@ -61,7 +61,7 @@ class RideController extends Controller {
      * delete a ride
      * @param int $user_id
      */
-    public function deleteRide($user_id) {
+    public function delete($user_id) {
         $query = "DELETE FROM rides WHERE id in (SELECT driving_id FROM users WHERE id = $user_id)";
         $result = $this->db->query($query);
         if($result) {
