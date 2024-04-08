@@ -36,7 +36,7 @@ function RegisterCard({ image }) {
     try {
       console.log(data);
       const response = await axios.post(
-        "http://localhost/Server/users/signup.php",
+        "http://localhost/Server/api.php?action=signup",
         data
       );
       console.log(response);
