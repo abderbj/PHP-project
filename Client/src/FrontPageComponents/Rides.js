@@ -9,7 +9,6 @@ import { UserOutlined } from '@ant-design/icons';
 const Rides = () => {
     const [isModalVisible, setIsModalVisible] = useState(false);
     const [selectedImage, setSelectedImage] = useState(null);
-
     const viewProfilePicture = (image) => {
         setSelectedImage(image);
         setIsModalVisible(true);
@@ -86,6 +85,25 @@ const Rides = () => {
         setSubOffers(offers.slice((currentPage - 1) * 9, currentPage * 9));
         console.log(subOffers);
     }, [currentPage, offers]);
+    const buttonPressed = (offer) => {
+        const data = new FormData();
+        const user = localStorage.getItem("userId");
+        data.append("action", "joinRide");
+        data.append("id", user);
+        data.append("ride_id", offer.id);
+        axios.post("http://localhost/Server/api.php", data)
+            .then(response => {
+                if (response.status === 200) {
+                    alert("Ride joined successfully.");
+                } else {
+                    alert("An error occurred. Please try again later.");
+                }
+            })
+            .catch(error => {
+                console.error(error);
+                alert("An error occurred. Please try again later.");
+            });
+    }
     return (
         <div className='offers flex flex-col'>
             <table className='tab'>
@@ -95,11 +113,12 @@ const Rides = () => {
                         <th>Name</th>
                         <th>Date</th>
                         <th>Time</th>
-                        <th>Currency</th>
+                        <th>Price</th>
                         <th>From</th>
                         <th>To</th>
                         <th>Rating</th>
                         <th>Places</th>
+                        <th></th>
                     </tr>
                 </thead>
                 {subOffers.map((offer) => {
@@ -118,6 +137,7 @@ const Rides = () => {
                             <td>{offer.arrival}</td>
                             <td>{offer.rating}</td>
                             <td>{offer.places}</td>
+                            <td><button type="submit" className={"button"} onClick={() => buttonPressed(offer)}>Join</button></td>
                         </tr>
                     );
                 })}
