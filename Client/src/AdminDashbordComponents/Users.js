@@ -7,7 +7,8 @@ import { RiDeleteBin5Line } from "react-icons/ri";
 function Users() {
     const [users, setUsers] = useState([]);
     const [currentPage, setCurrentPage] = useState(1);
-    const [subOffers, setSubOffers] = useState(users.slice(0, 9));
+    const [subOffers, setSubOffers] = useState([]);
+
     const handleDeleteUser = (u) => {
         const newUsers = users.filter(user => user.Phone !== u.Phone);
         console.log(u);
@@ -30,7 +31,7 @@ function Users() {
     }
 
     useEffect(() => {
-        // Function to fetch data when component moun   ts
+        // Function to fetch data when component mounts
         async function fetchData() {
             const data = new FormData();
             data.append("action", "getAllUsers");
@@ -55,10 +56,11 @@ function Users() {
 
         fetchData();
     }, []);
-    
+
     useEffect(() => {
         setSubOffers(users.slice((currentPage - 1) * 9, currentPage * 9));
     }, [currentPage, users]);
+
     return (
         <div className='users flex flex-col'>
             <table className='tab-admin '>
@@ -72,18 +74,18 @@ function Users() {
                         <th></th>
                     </tr>
                 </thead>
-                {subOffers.map((user) => {
-                    return (
-                        <tr key={user.id}>
-                            <td>{user.firstname} {user.lastname}</td>
-                            <td>{user.rating}</td>
-                            <td>{user.phonenumber}</td>
-                            <td>{user.RidesCreated}</td>
-                            <td>{user.RidesJoined}</td>
-                            <td onClick={() => handleDeleteUser(user)}><RiDeleteBin5Line /></td>
-                        </tr>
-                    );
-                })}
+                {Array.isArray(subOffers) && subOffers.map((user) => {
+    return (
+        <tr key={user.id}>
+            <td>{user.firstname} {user.lastname}</td>
+            <td>{user.rating}</td>
+            <td>{user.phonenumber}</td>
+            <td>{user.RidesCreated}</td>
+            <td>{user.RidesJoined}</td>
+            <td onClick={() => handleDeleteUser(user)}><RiDeleteBin5Line /></td>
+        </tr>
+    );
+})}
             </table>
             <Pagination defaultCurrent={1} total={50} onChange={(page) => setCurrentPage(page)} className='pag-admin' />
         </div>
