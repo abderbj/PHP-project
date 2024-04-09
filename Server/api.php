@@ -93,7 +93,7 @@ else if($action === "getAllRides"){
     echo json_encode($rideController->getAll());
 }
 else if($action === "createRide"){
-    $rideController->createRide($_POST['departure'], $_POST['arrival'], $_POST['date'], $_POST['time'], $_POST['seats'], $_POST['price']);
+    $rideController->createRide($_POST['departure'], $_POST['arrival'], $_POST['date'], $_POST['time'], $_POST['seats'], $_POST['price'], $_POST['description']);
 }
 else if($action === "deleteRide"){
     $rideController->delete($_POST['id']);

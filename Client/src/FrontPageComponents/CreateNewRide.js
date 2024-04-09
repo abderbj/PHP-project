@@ -1,4 +1,5 @@
 import React, { useState } from 'react';
+import axios from "axios";
 import './CreateNewRide.css';
 import img from './cross.png';
 import { closeModal } from '../reducers/showModalReducer';
@@ -10,10 +11,38 @@ const CreateNewRide = () => {
     const [date, setDate] = useState('');
     const [price, setPrice] = useState('');
     const [time, setTime] = useState('');
-
-    const handleSubmit = (e) => {
-        e.preventDefault();
-        console.log('Submitted:', { fromCity, toCity, date });
+    const [seats, setSeats] = useState('');
+    const [description, setDescription] = useState('');
+    const handleSubmit = async (event) => {
+        event.preventDefault();
+        if (!fromCity || !toCity || !date || !time || !price || !seats || !description) {
+            alert('All fields must be filled out');
+            return;
+        }
+        const data = new FormData();
+        data.append("departure", fromCity);
+        data.append("arrival", toCity);
+        data.append("date", date);
+        data.append("time", time);
+        data.append("seats", seats);
+        data.append("price", price);
+        data.append("description", description);
+        try {
+            console.log(data);
+            const response = await axios.post(
+                "http://localhost/Server/api.php?action=createRide",
+                data
+            );
+            console.log(response);
+            if (response.status === 200) {
+                console.log("New ride registered successfully");
+                handleCloseModal();
+            }
+        } catch (error) {
+            console.error(error);
+            alert("An error occurred. Please try again later.");
+            return;
+        }
     };
     const handleCloseModal = () => {
         dispatch(closeModal());
@@ -82,6 +111,8 @@ const CreateNewRide = () => {
                             <textarea
                                 id="description"
                                 placeholder="description"
+                                value={description}
+                                onChange={(e) => setDescription(e.target.value)}
                             />
                     </div>
                     <div className="h_line"></div>
@@ -91,6 +122,8 @@ const CreateNewRide = () => {
                             type="number"
                             id="seats"
                             className="seats"
+                            value={seats}
+                            onChange={(e) => setSeats(e.target.value)}
                         />
                     <button type="submit">Create</button>
                     </div>
