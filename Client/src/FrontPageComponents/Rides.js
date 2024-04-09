@@ -95,8 +95,10 @@ const Rides = () => {
         console.log(data.get("ride_id"));
         axios.post("http://localhost/Server/api.php", data)
             .then(response => {
+                console.log(response.data);
                 if (response.status === 200) {
                     alert("Ride joined successfully.");
+
                 } else {
                     alert("An error occurred. Please try again later.");
                 }

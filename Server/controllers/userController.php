@@ -226,7 +226,9 @@ class UserController extends Controller {
         // $user_id = $_SESSION['user_id'];
         $sql = "UPDATE users SET joined_id=$ride_id WHERE id=$user_id;
                 UPDATE rides SET places=places-1 WHERE id=$ride_id";
+        echo json_encode(array("message"=>$sql));
         $result = $this->db->query($sql);
+
         if ($result) {
             echo json_encode(array("message"=>"Ride joined successfully"));
             return true;
