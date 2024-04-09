@@ -5,6 +5,7 @@ import axios from 'axios';
 import { RiDeleteBin5Line } from "react-icons/ri";
 
 function Users() {
+    const [refreshKey, setRefreshKey] = useState(0);
     const [users, setUsers] = useState([]);
     const [currentPage, setCurrentPage] = useState(1);
     const [subOffers, setSubOffers] = useState([]);
@@ -16,10 +17,14 @@ function Users() {
         const data = new FormData();
         data.append("action", "deleteUser");
         data.append("id", u.id);
+
         axios.post("http://localhost/Server/api.php", data)
             .then(response => {
+                console.log(response);
                 if (response.status === 200) {
+                    setRefreshKey(oldKey => oldKey + 1);
                     alert("User deleted successfully");
+                    
                 } else {
                     alert("An error occurred. Please try again later.");
                 }
@@ -55,7 +60,7 @@ function Users() {
         }
 
         fetchData();
-    }, []);
+    }, [refreshKey]);
 
     useEffect(() => {
         setSubOffers(users.slice((currentPage - 1) * 9, currentPage * 9));
