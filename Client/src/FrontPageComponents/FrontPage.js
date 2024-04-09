@@ -1,6 +1,6 @@
 import Offers from './Offers';
 import SideBar from './SideBar';
-import NavBar from "./NavBar";
+import NavBar from './NavBar';
 import CreateNewRide from './CreateNewRide';
 import { useSelector } from 'react-redux';
 function FrontPage() {

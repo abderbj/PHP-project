@@ -1,11 +1,11 @@
 import { AiOutlineEye, AiOutlineEyeInvisible } from "react-icons/ai";
 import React, { useState } from "react";
 import "./LoginCard.css";
-import { UseDispatch } from "react-redux";
+import { useDispatch } from "react-redux";
 import { setUser } from "../reducers/UserReducer";
 import axios from "axios";
 function LoginCard() {
-  const dispatch = UseDispatch();
+  const dispatch = useDispatch();
   const [showPassword, setShowPassword] = useState(false);
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");

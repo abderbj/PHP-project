@@ -23,7 +23,7 @@ const CreateNewRide = () => {
         const data = new FormData();
         data.append("action", "createRide");
         data.append("departure", fromCity);
-        date.append("user" , user);
+        data.append("id" , user);
         data.append("arrival", toCity);
         data.append("date", date);
         data.append("time", time);
