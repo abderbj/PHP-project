@@ -6,8 +6,8 @@ import { closeModal } from '../reducers/showModalReducer';
 import { useDispatch, useSelector } from 'react-redux';
 import {UserReducer} from "../reducers/UserReducer";
 const CreateNewRide = () => {
-    const user = useSelector((state) => state.UserReducer.user);
-
+   // const user = useSelector((state) => state.UserReducer.user);
+    const user = localStorage.getItem("userId");
     console.log("user",user);
     const dispatch = useDispatch();
     const [fromCity, setFromCity] = useState('');

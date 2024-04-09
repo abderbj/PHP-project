@@ -34,14 +34,15 @@ function LoginCard() {
       if (response.status === 200) {
         console.log("User logged in successfully");
         console.log(response)
+        localStorage.setItem("userId", response.data.id);
         dispatch(setUser(response.data.id))
        // ReactSession.setStoreType("localStorage");
         //ReactSession.set("id", response.data.id);
 
         if (response.data.isAdmin) {
-         // window.location.href = "/admin";
+          window.location.href = "/admin";
       } else {
-         // window.location.href = "/frontpage";
+          window.location.href = "/frontpage";
       }
       }
       
