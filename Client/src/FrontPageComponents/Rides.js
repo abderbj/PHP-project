@@ -63,7 +63,7 @@ const Rides = (props) => {
 
             try {
                 const response = await axios.post("http://localhost/Server/api.php", data);
-                console.log(response);
+                //console.log(response);
                 if (response.status === 200) {
                     const responseData = response.data;
                     if (responseData === "[]null") {
