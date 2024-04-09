@@ -54,7 +54,7 @@ CREATE TABLE `users` (
   `phonenumber` int(100) NOT NULL,
   `email` varchar(255) NOT NULL,
   `password` varchar(100) NOT NULL,
-  `pfp_path` varchar(255) NOT NULL DEFAULT 'im/default.jpeg',
+  `pfp_path` varchar(255) NOT NULL DEFAULT 'im/default.PNG',
   `is_admin` tinyint(4) NOT NULL DEFAULT 0,
   `rating`  float(10) NOT NULL DEFAULT 0,
   `nb_ratings` int(11) NOT NULL DEFAULT 0,

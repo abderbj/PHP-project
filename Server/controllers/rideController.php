@@ -33,6 +33,7 @@ class RideController extends Controller {
     }
     /**
      * create a ride
+     * @param string $driver
      * @param string $departure
      * @param string $arrival
      * @param string $date
@@ -41,8 +42,8 @@ class RideController extends Controller {
      * @param string $description
      * @return void
      */
-    public function createRide($departure, $arrival, $date,$time, $places, $price, $description) {
-        $driver = $_SESSION['user_id'];
+    public function createRide($driver, $departure, $arrival, $date,$time, $places, $price, $description) {
+        // $driver = $_SESSION['user_id'];
         $query = "INSERT INTO rides (departure, arrival, date,time, price, places, description)
                   VALUES ('$departure', '$arrival', '$date','$time', '$price', '$places', '$description')";
         $result = $this->db->query($query);

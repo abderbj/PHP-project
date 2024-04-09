@@ -22,9 +22,10 @@ if($action === "signUp"){
 else if($action === "login"){
     $userController->login($_POST['email'], $_POST['password']);
 }
-else if($action === "logout"){
-    $userController->logout();
-}
+// else if($action === "logout"){
+//     session_destroy();
+//     echo json_encode(array("message"=>"logged out successfully"));
+// }
 else if($action === "getAllUsers"){
     if(isset($_POST['orderBy'])){
         $userController->setOrderBy($_POST['orderBy']);
@@ -44,16 +45,16 @@ else if($action === "getAllUsers"){
     echo json_encode($userController->getAll());
 }
 else if($action === "report"){
-    $userController->report($_POST['id']);
+    $userController->report($_POST['id'],$_POST['reported_id']);
 }
 else if($action === "deleteUser"){
     $userController->delete($_POST['id']);
 }
 else if($action === "rate"){
-    $userController->rate($_POST["id"], $_POST["rating"]);
+    $userController->rate($_POST["rated_id"], $_POST["rating"]);
 }
 else if($action === "joinRide"){
-    $userController->joinRide($_POST["rideId"]);
+    $userController->joinRide($_POST["id"],$_POST["ride_id"]);
 
 }
 else if($action === "count"){
@@ -93,7 +94,7 @@ else if($action === "getAllRides"){
     echo json_encode($rideController->getAll());
 }
 else if($action === "createRide"){
-    $rideController->createRide($_POST['departure'], $_POST['arrival'], $_POST['date'], $_POST['time'], $_POST['seats'], $_POST['price'], $_POST['description']);
+    $rideController->createRide($_POST["id"],$_POST['departure'], $_POST['arrival'], $_POST['date'], $_POST['time'], $_POST['seats'], $_POST['price'], $_POST['description']);
 }
 else if($action === "deleteRide"){
     $rideController->delete($_POST['id']);
