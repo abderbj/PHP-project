@@ -1,21 +1,18 @@
 import { createSlice } from '@reduxjs/toolkit';
 
 const initialState = {
-    show: false
+    user : undefined
 };
 
-const showModalSlice = createSlice({
-    name: 'showModal',
+const UserReducer = createSlice({
+    name: 'user',
     initialState,
     reducers: {
-        closeModal(state) {
-            state.show = false;
-        },
-        openModal(state) {
-            state.show = true;
+        serUser(state, action) {
+            state.user = action.payload;
         }
     }
 });
 
-export const { openModal, closeModal } = showModalSlice.actions;
-export default showModalSlice.reducer;
+export const { openModal, closeModal } = UserReducer.actions;
+export default UserReducer.reducer;
