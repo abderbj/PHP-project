@@ -13,7 +13,7 @@ class RideController extends Controller {
     public function getAll() {
         //$query = "Select rides.*, users.*,(select count(*) from users where users.joined_id = rides.id) as number_users from rides, users where rides.id = users.driving_id 
         //";
-        $query = "select * from rides";
+        $query = "select rides.*, users.* from rides, users ";
         $result = $this->db->query($query);
         $rows = array();
         while($row = $result->fetch_assoc()) {

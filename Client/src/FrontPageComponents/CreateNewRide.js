@@ -16,7 +16,7 @@ const CreateNewRide = () => {
     const [description, setDescription] = useState('');
     const handleSubmit = async (event) => {
         event.preventDefault();
-        if (!fromCity || !toCity || !date || !time || !price || !seats || !description) {
+        if (!fromCity || !toCity || !date || !time || !price || !seats) {
             alert('All fields must be filled out');
             return;
         }
@@ -29,7 +29,7 @@ const CreateNewRide = () => {
         data.append("time", time);
         data.append("seats", seats);
         data.append("price", price);
-        data.append("description", description);
+        data.append("description", "");
         try {
             console.log(data);
             const response = await axios.post(
@@ -110,15 +110,6 @@ const CreateNewRide = () => {
                             />
                         </div>
                     </div>
-                    <div className="row">
-                            <textarea
-                                id="description"
-                                placeholder="description"
-                                value={description}
-                                onChange={(e) => setDescription(e.target.value)}
-                            />
-                    </div>
-                    <div className="h_line"></div>
                     <div className="row">
                         <label htmlFor="seats">Seats</label>
                         <input
