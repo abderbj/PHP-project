@@ -123,12 +123,12 @@ class UserController extends Controller {
      */
     public function delete($id) {
         $sql = "DELETE FROM rides
-        WHERE id = (
-        SELECT driving_id
-        FROM users
-        WHERE id = $id);
-        DELETE FROM users
-        WHERE id = $id";
+                WHERE id = (
+                SELECT driving_id
+                FROM users
+                WHERE id = $id);
+                DELETE FROM users
+                WHERE id = $id";
         $result = $this->db->query($sql);
         if ($result) {
             echo json_encode(array("message"=>"User deleted successfully"));
@@ -145,10 +145,11 @@ class UserController extends Controller {
      * @return void
      */
     public function report($reporter_id, $id) {
-        $sql = "SELECT * FROM users WHERE id=$id ORDER BY firstname ASC";
+        $sql = "SELECT * FROM users WHERE id=$id";
         // $reporter_id = $_SESSION['user_id'];
         $result = $this->db->query($sql);
-        if ($result["rating"] <= 1 and $result["nb_ratings"] > 2) {
+        $result = $result->fetch_assoc();
+        // if ($result["rating"] <= 1 and $result["nb_ratings"] > 2) {
             $name = $result["firstname"] . " " . $result["lastname"];
             $sender = $this->db->query("SELECT email FROM users WHERE id=$reporter_id")->fetch_assoc()["email"];
             $to = $this->db->query("SELECT email FROM users WHERE is_admin=1")->fetch_assoc()["email"];
@@ -162,7 +163,7 @@ class UserController extends Controller {
             } else {
                 echo json_encode(array("message" => "Failed to send report"));
             }
-        }
+        // }
     }
     /**
      * Get user table with number of joined and created rides
@@ -224,11 +225,12 @@ class UserController extends Controller {
         //     return false;
         // }
         // $user_id = $_SESSION['user_id'];
-        $sql = "UPDATE users SET joined_id=$ride_id WHERE id=$user_id;
-                UPDATE rides SET places=places-1 WHERE id=$ride_id";
-        echo json_encode(array("message"=>$sql));
-        $result = $this->db->query($sql);
-
+        $this->db->begin_transaction();
+        $sql = "UPDATE users SET joined_id=$ride_id WHERE id=$user_id;";
+        $result = $this->db->prepare($sql);
+        $sql = "UPDATE rides SET places=places-1 WHERE id=$ride_id;";
+        $result = $this->db->prepare($sql);
+        $result = $result->execute();
         if ($result) {
             echo json_encode(array("message"=>"Ride joined successfully"));
             return true;
