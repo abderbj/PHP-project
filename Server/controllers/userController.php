@@ -172,13 +172,7 @@ class UserController extends Controller {
      * @return array
      */
     public function getAll() {
-        $query = "SELECT u.id, u.firstname, u.lastname, u.phonenumber, u.email, u.rating, u.pfp_path, COUNT(DISTINCT cr.id) AS created_rides, COUNT(DISTINCT jr.id) AS joined_rides
-                  FROM $this->table u
-                  LEFT JOIN rides cr ON u.id = cr.driver
-                  LEFT JOIN rides jr ON u.id = jr.joined_id
-                  WHERE $this->where
-                  GROUP BY u.id, u.firstname, u.lastname, u.phonenumber, u.email, u.rating, u.pfp_path;
-                  ORDER BY $this->orderBy";
+        $query = "select * from users";
         $result = $this->db->query($query);
         $results = array();
         while ($row = $result->fetch_assoc()) {

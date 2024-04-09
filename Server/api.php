@@ -90,7 +90,7 @@ else if($action === "getAllRides"){
      */
     if(isset($_POST['having'])){
         $rideController->setHaving($_POST['having']);
-    }
+    } 
     echo json_encode($rideController->getAll());
 }
 else if($action === "createRide"){

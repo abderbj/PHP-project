@@ -11,25 +11,15 @@ class RideController extends Controller {
      * @return void
      */
     public function getAll() {
-        $query = "SELECT u.*, r.*, COUNT(joined_user.id) AS num_users_joining
-                  FROM users u
-                  JOIN rides r ON u.driving_id = r.id
-                  LEFT JOIN users joined_user ON r.id = joined_user.joined_id
-                  GROUP BY u.id, r.id;
-                  WHERE $this->where
-                  GROUP BY r.id
-                  HAVING (r.places - num_users_joined) >= $this->having
-                  ORDER by $this->orderBy";
+        //$query = "Select rides.*, users.*,(select count(*) from users where users.joined_id = rides.id) as number_users from rides, users where rides.id = users.driving_id 
+        //";
+        $query = "select * from rides";
         $result = $this->db->query($query);
-        if($result->num_rows == 0) {
-            echo json_encode(array("message"=>"No rides found"));
-            return;
-        }
         $rows = array();
         while($row = $result->fetch_assoc()) {
             $rows[] = $row;
         }
-        echo json_encode($rows);
+        return $rows;
     }
     /**
      * create a ride
@@ -44,7 +34,7 @@ class RideController extends Controller {
      */
     public function createRide($driver, $departure, $arrival, $date,$time, $places, $price, $description) {
         // $driver = $_SESSION['user_id'];
-        $query = "INSERT INTO rides (departure, arrival, date,time, price, places, description)
+        $query = "INSERT INTO rides (departure, arrival, departure_date, departure_time, price, places, description)
                   VALUES ('$departure', '$arrival', '$date','$time', '$price', '$places', '$description')";
         $result = $this->db->query($query);
         $ride_id = $this->db->insert_id;
