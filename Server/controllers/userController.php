@@ -1,7 +1,6 @@
 <?php
 
 include 'controller.php';
-include 'user.php';
 class UserController extends Controller {
 
     public function __construct() {
@@ -69,7 +68,7 @@ class UserController extends Controller {
             echo json_encode("You are already logged in, please logout first");
             return false;
         }
-        $sql = "select password, is_admin from registration where email='$email' ";
+        $sql = "select * from users where email='$email' ";
         $result = $this->db->query($sql);
         if ($result) {
             if ($result->num_rows > 0) {
@@ -77,6 +76,8 @@ class UserController extends Controller {
                 if (password_verify($password, $row['password'])) {
                     
                     echo json_encode(array("message"=>"Login successful",
+                    "id" => $row['id'],
+                    "email" => $row['email'],
                     "is_admin"=>$row['is_admin'],
                     "firstName"=>$row['firstname'],
                     "lastName"=>$row['lastname'],
