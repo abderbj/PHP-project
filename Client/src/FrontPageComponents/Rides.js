@@ -113,7 +113,7 @@ const Rides = () => {
                 <Dropdown
                   overlay={menu(
                     `data:image/png;base64,${offer.pfp_path}`,
-                    offer.id
+                    offer.driver_id
                   )}
                   trigger={["click"]}
                 >
