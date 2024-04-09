@@ -1,4 +1,4 @@
-import Offers from './Offers';
+import Rides from './Rides';
 import SideBar from './SideBar';
 import NavBar from './NavBar';
 import CreateNewRide from './CreateNewRide';
@@ -9,7 +9,7 @@ function FrontPage() {
         <div>
             <SideBar />
             <NavBar />
-            <Offers />
+            <Rides />
             {show && <CreateNewRide />}
         </div>
     );
