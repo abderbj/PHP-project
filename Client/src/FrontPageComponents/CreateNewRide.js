@@ -3,8 +3,9 @@ import axios from "axios";
 import './CreateNewRide.css';
 import img from './cross.png';
 import { closeModal } from '../reducers/showModalReducer';
-import { useDispatch } from 'react-redux';
+import { useDispatch, useSelector } from 'react-redux';
 const CreateNewRide = () => {
+    const user = useSelector((state) => state.UserReducer.user);
     const dispatch = useDispatch();
     const [fromCity, setFromCity] = useState('');
     const [toCity, setToCity] = useState('');
@@ -22,6 +23,7 @@ const CreateNewRide = () => {
         const data = new FormData();
         data.append("action", "createRide");
         data.append("departure", fromCity);
+        date.append("user" , user);
         data.append("arrival", toCity);
         data.append("date", date);
         data.append("time", time);

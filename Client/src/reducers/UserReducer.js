@@ -8,11 +8,11 @@ const UserReducer = createSlice({
     name: 'user',
     initialState,
     reducers: {
-        serUser(state, action) {
+        setUser(state, action) {
             state.user = action.payload;
         }
     }
 });
 
-export const { openModal, closeModal } = UserReducer.actions;
+export const { setUser } = UserReducer.actions;
 export default UserReducer.reducer;

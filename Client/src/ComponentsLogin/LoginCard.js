@@ -1,8 +1,11 @@
 import { AiOutlineEye, AiOutlineEyeInvisible } from "react-icons/ai";
 import React, { useState } from "react";
 import "./LoginCard.css";
+import { UseDispatch } from "react-redux";
+import { setUser } from "../reducers/UserReducer";
 import axios from "axios";
 function LoginCard() {
+  const dispatch = UseDispatch();
   const [showPassword, setShowPassword] = useState(false);
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
@@ -29,6 +32,7 @@ function LoginCard() {
       console.log(response);   
       if (response.status === 200) {
         console.log("User logged in successfully");
+        dispatch(setUser(response.data.id))
         if (response.data.isAdmin) {
           window.location.href = "/admin";
       } else {
