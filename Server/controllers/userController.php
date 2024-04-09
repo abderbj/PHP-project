@@ -145,10 +145,11 @@ class UserController extends Controller {
      * @return void
      */
     public function report($reporter_id, $id) {
-        $sql = "SELECT * FROM users WHERE id=$id ORDER BY firstname ASC";
+        $sql = "SELECT * FROM users WHERE id=$id";
         // $reporter_id = $_SESSION['user_id'];
         $result = $this->db->query($sql);
-        if ($result["rating"] <= 1 and $result["nb_ratings"] > 2) {
+        $result = $result->fetch_assoc();
+        // if ($result["rating"] <= 1 and $result["nb_ratings"] > 2) {
             $name = $result["firstname"] . " " . $result["lastname"];
             $sender = $this->db->query("SELECT email FROM users WHERE id=$reporter_id")["email"];
             $to = $this->db->query("SELECT email FROM users WHERE is_admin=1")["email"];
@@ -162,7 +163,7 @@ class UserController extends Controller {
             } else {
                 echo json_encode(array("message" => "Failed to send report"));
             }
-        }
+        // }
     }
     /**
      * Get user table with number of joined and created rides
