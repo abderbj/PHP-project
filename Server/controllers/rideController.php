@@ -11,12 +11,30 @@ class RideController extends Controller {
      * @return void
      */
     public function getAll() {
-        //$query = "Select rides.*, users.*,(select count(*) from users where users.joined_id = rides.id) as number_users from rides, users where rides.id = users.driving_id 
-        //";
-        $query = "select rides.*, users.* from rides, users ";
+        $query = "SELECT 
+        rides.*, 
+        drivers.firstname AS firstname,
+        drivers.lastname AS lastname,
+        drivers.email AS email,
+        drivers.phonenumber AS phonenumber,
+        drivers.pfp_path AS pfp_path,
+        drivers.rating AS rating,
+        COUNT(passengers.id) AS user_count
+    FROM 
+        rides 
+    LEFT JOIN 
+        users AS passengers ON rides.id = passengers.joined_id
+    LEFT JOIN
+        users AS drivers ON rides.id = drivers.driving_id
+    GROUP BY 
+        rides.id;";
         $result = $this->db->query($query);
         $rows = array();
         while($row = $result->fetch_assoc()) {
+            if (isset($row['pfp_path']) && file_exists($row['pfp_path'])) {
+                $imageData = base64_encode(file_get_contents($row['pfp_path']));
+                $row['pfp_path'] =$imageData;
+            }
             $rows[] = $row;
         }
         return $rows;
@@ -32,21 +50,35 @@ class RideController extends Controller {
      * @param string $description
      * @return void
      */
-    public function createRide($driver, $departure, $arrival, $date,$time, $places, $price, $description) {
-        // $driver = $_SESSION['user_id'];
+    public function createRide($driver, $departure, $arrival, $date, $time, $places, $price, $description) {
+        $this->db->begin_transaction();
+    
         $query = "INSERT INTO rides (departure, arrival, departure_date, departure_time, price, places, description)
-                  VALUES ('$departure', '$arrival', '$date','$time', '$price', '$places', '$description')";
-        $result = $this->db->query($query);
-        $ride_id = $this->db->insert_id;
-        $query = "UPDATE users SET driving_id = $ride_id WHERE id = $driver";
-        $result = $this->db->query($query);
-        if($result) {
-            echo json_encode(array("message"=>"Ride created successfully"));
-            return;
+                  VALUES (?, ?, ?, ?, ?, ?, ?)";
+        $stmt = $this->db->prepare($query);
+        $stmt->bind_param("sssssss", $departure, $arrival, $date, $time, $price, $places, $description);
+    
+        if ($stmt->execute()) {
+            $ride_id = $this->db->insert_id;
+            $stmt->close();
+    
+            $query = "UPDATE users SET driving_id = ? WHERE id = ?";
+            $stmt = $this->db->prepare($query);
+            $stmt->bind_param("ii", $ride_id, $driver);
+            echo(json_encode(array("ttt" => "Ride created successfully", "ride_id" => $driver)));
+            if ($stmt->execute()) {
+                $this->db->commit();
+                echo json_encode(array("message" => "Ride created successfully", "ride_id" => $ride_id));
+            } else {
+                $this->db->rollback();
+                echo json_encode(array("message" => "Failed to update driver information"));
+            }
         } else {
-            echo json_encode(array("message"=>"Failed to create ride"));
-            return;
+            $this->db->rollback();
+            echo json_encode(array("message" => "Failed to create ride"));
         }
+    
+        $stmt->close();
     }
     /**    
      * delete a ride

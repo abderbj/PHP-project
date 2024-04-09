@@ -3,6 +3,7 @@ import React, { useState } from "react";
 import "./LoginCard.css";
 import { useDispatch } from "react-redux";
 import { setUser } from "../reducers/UserReducer";
+
 import axios from "axios";
 function LoginCard() {
   const dispatch = useDispatch();
@@ -32,11 +33,15 @@ function LoginCard() {
       console.log(response);   
       if (response.status === 200) {
         console.log("User logged in successfully");
+        console.log(response)
         dispatch(setUser(response.data.id))
+       // ReactSession.setStoreType("localStorage");
+        //ReactSession.set("id", response.data.id);
+
         if (response.data.isAdmin) {
-          window.location.href = "/admin";
+         // window.location.href = "/admin";
       } else {
-          window.location.href = "/frontpage";
+         // window.location.href = "/frontpage";
       }
       }
       

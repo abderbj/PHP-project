@@ -3,7 +3,48 @@ import "../App.css";
 import { useSelector } from 'react-redux'
 import { Pagination } from 'antd';
 import axios from 'axios';
+import "./Rides.css";
+import { Menu, Dropdown, Spin,Modal } from 'antd';
+import { UserOutlined } from '@ant-design/icons';
 const Rides = () => {
+    const [isModalVisible, setIsModalVisible] = useState(false);
+    const [selectedImage, setSelectedImage] = useState(null);
+
+    const viewProfilePicture = (image) => {
+        setSelectedImage(image);
+        setIsModalVisible(true);
+    };
+   
+
+    const reportUser = (id) => {
+        const data = new FormData();
+        data.append("action", "report");
+        data.append("id", id);
+        data.append("reported_id",id);
+        axios.post("http://localhost/Server/api.php", data)
+            .then(response => {
+                if (response.status === 200) {
+                    alert("User has been reported.");
+                } else {
+                    alert("An error occurred. Please try again later.");
+                }
+            })
+            .catch(error => {
+                console.error(error);
+                alert("An error occurred. Please try again later.");
+            });
+    };
+
+    const menu = (image,id) => (
+        <Menu>
+            <Menu.Item key="1" onClick={() => reportUser(id)}>
+                Report User
+            </Menu.Item>
+            <Menu.Item key="2" onClick={() => viewProfilePicture(image)}>
+                View Profile Picture
+            </Menu.Item>
+        </Menu>
+    );
     const filters = useSelector(state => state.filters);
     const [offers, setOffers] = useState([]);
     const [currentPage, setCurrentPage] = useState(1);
@@ -50,6 +91,7 @@ const Rides = () => {
             <table className='tab'>
                 <thead>
                     <tr>
+                        <th>Profile Picture</th>
                         <th>Name</th>
                         <th>Date</th>
                         <th>Time</th>
@@ -63,6 +105,11 @@ const Rides = () => {
                 {subOffers.map((offer) => {
                     return (
                         <tr key={offer.id}>
+                            <td>
+                            <Dropdown overlay={menu(`data:image/png;base64,${offer.pfp_path}`,offer.id)} trigger={['click']}>
+                                    <img src={`data:image/png;base64,${offer.pfp_path}`} alt='Profile Picture' className='pfp' />
+                                </Dropdown>
+                            </td>
                             <td>{offer.firstname}</td>
                             <td>{offer.departure_date}</td>
                             <td>{offer.departure_time}</td>
@@ -76,6 +123,9 @@ const Rides = () => {
                 })}
             </table>
             <Pagination defaultCurrent={1} total={50} onChange={(page) => setCurrentPage(page)} className='pag' />
+            <Modal visible={isModalVisible} onCancel={() => setIsModalVisible(false)} footer={null} centered>
+                <img src={selectedImage} alt="Profile" style={{ width: '100%', height: 'auto' }} />
+            </Modal>
         </div>
     )
 }

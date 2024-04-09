@@ -12,6 +12,21 @@ function Users() {
         const newUsers = users.filter(user => user.Phone !== u.Phone);
         console.log(u);
         setUsers(newUsers);
+        const data = new FormData();
+        data.append("action", "deleteUser");
+        data.append("id", u.id);
+        axios.post("http://localhost/Server/api.php", data)
+            .then(response => {
+                if (response.status === 200) {
+                    alert("User deleted successfully");
+                } else {
+                    alert("An error occurred. Please try again later.");
+                }
+            })
+            .catch(error => {
+                console.error(error);
+                alert("An error occurred. Please try again later.");
+            });
     }
 
     useEffect(() => {
