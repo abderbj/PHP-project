@@ -71,7 +71,7 @@ else if($action === "getAllRides"){
         $rideController->addWhere("departure LIKE '%".$_POST['departure']."%'");
     }
     if(isset($_POST['arrival'])){
-        $rideController->addWhere("arrival'])){ LIKE '%".$_POST['arrival']."%'");
+        $rideController->addWhere("arrival' LIKE '%".$_POST['arrival']."%'");
     }
     if(isset($_POST['date'])){
         $rideController->addWhere("date = '".$_POST['date']."'");
@@ -92,7 +92,7 @@ else if($action === "getAllRides"){
         $rideController->setHaving($_POST['having']);
     } 
     echo json_encode($rideController->getAll());
-}
+    }
 else if($action === "createRide"){
     $rideController->createRide($_POST["id"],$_POST['departure'], $_POST['arrival'], $_POST['date'], $_POST['time'], $_POST['seats'], $_POST['price'], $_POST['description']);
 }
