@@ -17,17 +17,18 @@ function LoginCard() {
       return;
     }
     const data = new FormData();
+    data.append("action", "login");
     data.append("email", email);
     data.append("password", password);
     try {
       console.log(data);
       const response = await axios.post(
-        "http://localhost/Server/users/login.php",
+        "http://localhost/Server/api.php",
         data
       );
-      console.log(response);
+      console.log(response);   
       if (response.status === 200) {
-        console.log("User logged in  successfully");
+        console.log("User logged in successfully");
         if (response.data.isAdmin) {
           window.location.href = "/admin";
       } else {

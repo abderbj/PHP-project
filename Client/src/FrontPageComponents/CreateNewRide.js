@@ -20,6 +20,7 @@ const CreateNewRide = () => {
             return;
         }
         const data = new FormData();
+        data.append("action", "createRide");
         data.append("departure", fromCity);
         data.append("arrival", toCity);
         data.append("date", date);
@@ -30,7 +31,7 @@ const CreateNewRide = () => {
         try {
             console.log(data);
             const response = await axios.post(
-                "http://localhost/Server/api.php?action=createRide",
+                "http://localhost/Server/api.php",
                 data
             );
             console.log(response);

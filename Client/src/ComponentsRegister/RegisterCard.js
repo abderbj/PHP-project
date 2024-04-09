@@ -24,6 +24,7 @@ function RegisterCard({ image }) {
     
 
     const data = new FormData();
+    data.append("action", "signUp");
     data.append("firstName", firstName);
     data.append("lastName", lastName);
     data.append("phoneNumber", phoneNumber);
@@ -31,12 +32,11 @@ function RegisterCard({ image }) {
     data.append("password", password);
     console.log(image);
     if(image != null){
-    data.append("image", image);
-    }
+    data.append("image", image);    }
     try {
       console.log(data);
       const response = await axios.post(
-        "http://localhost/Server/api.php?action=signup",
+        "http://localhost/Server/api.php",
         data
       );
       console.log(response);
