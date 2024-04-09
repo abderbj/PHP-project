@@ -6,7 +6,7 @@ import axios from 'axios';
 import "./Rides.css";
 import { Menu, Dropdown, Spin,Modal } from 'antd';
 import { UserOutlined } from '@ant-design/icons';
-const Rides = () => {
+const Rides = (props) => {
     const [isModalVisible, setIsModalVisible] = useState(false);
     const [selectedImage, setSelectedImage] = useState(null);
 
@@ -81,7 +81,7 @@ const Rides = () => {
 
         // Call fetchData only once when component mounts
         fetchData();
-    }, []);
+    }, [props.refreshKey]);
     useEffect(() => {
         setSubOffers(offers.slice((currentPage - 1) * 9, currentPage * 9));
         console.log(subOffers);
