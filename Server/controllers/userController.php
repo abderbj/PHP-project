@@ -150,8 +150,8 @@ class UserController extends Controller {
         $result = $this->db->query($sql);
         if ($result["rating"] <= 1 and $result["nb_ratings"] > 2) {
             $name = $result["firstname"] . " " . $result["lastname"];
-            $sender = $this->db->query("SELECT email FROM users WHERE id=$reporter_id")["email"];
-            $to = $this->db->query("SELECT email FROM users WHERE is_admin=1")["email"];
+            $sender = $this->db->query("SELECT email FROM users WHERE id=$reporter_id")->fetch_assoc()["email"];
+            $to = $this->db->query("SELECT email FROM users WHERE is_admin=1")->fetch_assoc()["email"];
             $subject = "User Report";
             $message = "User $name with ID $id has been reported. Please take appropriate action.";
             $headers = "From: $sender" . "\r\n" .
@@ -224,7 +224,7 @@ class UserController extends Controller {
         //     return false;
         // }
         // $user_id = $_SESSION['user_id'];
-        $sql = "UPDATE users SET riding_id=$ride_id WHERE id=$user_id
+        $sql = "UPDATE users SET joined_id=$ride_id WHERE id=$user_id;
                 UPDATE rides SET places=places-1 WHERE id=$ride_id";
         $result = $this->db->query($sql);
         if ($result) {
