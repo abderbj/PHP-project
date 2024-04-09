@@ -91,6 +91,8 @@ const Rides = () => {
         data.append("action", "joinRide");
         data.append("id", user);
         data.append("ride_id", offer.id);
+        console.log(data.get("id"));
+        console.log(data.get("ride_id"));
         axios.post("http://localhost/Server/api.php", data)
             .then(response => {
                 if (response.status === 200) {

@@ -224,7 +224,8 @@ class UserController extends Controller {
         //     return false;
         // }
         // $user_id = $_SESSION['user_id'];
-        $sql = "INSERT INTO joined_rides (user_id, ride_id) VALUES ($user_id, $ride_id)";
+        $sql = "UPDATE users SET riding_id=$ride_id WHERE id=$user_id
+                UPDATE rides SET places=places-1 WHERE id=$ride_id";
         $result = $this->db->query($sql);
         if ($result) {
             echo json_encode(array("message"=>"Ride joined successfully"));
