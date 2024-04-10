@@ -110,6 +110,19 @@ ALTER TABLE `users`
 --
 
 
+-- Insert dummy data into the `rides` table
+INSERT INTO `rides` (`id`, `places`, `departure`, `arrival`, `departure_time`, `departure_date`, `price`, `description`) VALUES
+(1, 3, 'New York', 'Los Angeles', '2024-03-28 08:00:00', '2024-03-28', 50.00, 'Road trip across the country'),
+(2, 2, 'San Francisco', 'Las Vegas', '2024-03-29 10:00:00', '2024-03-29', 30.00, 'Weekend getaway'),
+(3, 4, 'Chicago', 'Miami', '2024-03-30 12:00:00', '2024-03-30', 80.00, 'Vacation with friends');
+
+-- Insert dummy data into the `users` table
+INSERT INTO `users` (`id`, `firstname`, `lastname`, `phonenumber`, `email`, `password`, `pfp_path`, `is_admin`, `rating`, `nb_ratings`, `joined_id`, `driving_id`) VALUES
+(1, 'John', 'Doe', 1234567890, 'john.doe@example.com', 'password123', 'im/john.PNG', 0, 4.5, 10, 1, 2),
+(2, 'Jane', 'Smith', 9876543210, 'jane.smith@example.com', 'password456', 'im/jane.PNG', 0, 4.2, 8, 2, 3),
+(3, 'Mike', 'Johnson', 5555555555, 'mike.johnson@example.com', 'password789', 'im/mike.PNG', 1, 4.8, 12, 3, 1);
+
+
 
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
 /*!40101 SET CHARACTER_SET_RESULTS=@OLD_CHARACTER_SET_RESULTS */;
