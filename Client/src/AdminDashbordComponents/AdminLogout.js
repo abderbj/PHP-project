@@ -8,9 +8,9 @@ function AdminLogout() {
     window.location.href = "/login";
   };
   return (
-    <button className="logout-button" onClick={handleLogout}>
+    <div  className="logout-button" onClick={handleLogout}>
       Logout
-    </button>
+    </div>
   );
 }
 export default AdminLogout;

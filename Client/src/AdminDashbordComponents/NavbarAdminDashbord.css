@@ -1,68 +1,54 @@
-.nav-bar-admin{
-    gap: 40px;
-    width: 100%;
-    background-color: #DEE1E6;
-    height : 73px;
-}
-
-.nav-bar-label-admin {
-    font-weight: bold;
-    margin-right: 8px;
-}
-
-.nav-bar-img-admin {
-    margin-right: 16px; 
-}
-
-.navbar-div-admin {
-    display: flex;
+.nav-bar-admin {
+    background-color: #ffffff;
+    height: 60px;
+    padding: 10px;
+    box-shadow: 0px 2px 4px rgba(0, 0, 0, 0.1);
+    justify-content: space-between;
+    gap:40px;
+  }
+  
+  .navbar-img-admin {
+    width: 40px;
+    height: auto;
+  }
+  
+  .navbar-div-admin {
+    align-items: center;
+  }
+  
+  .nav-bar-label-admin {
+    font-size: 16px;
     margin-right: 10px;
-    position: relative;
-    left: 130px;
-    top: 7px;
-}
-
-.navbar-input-admin {
+  }
+  
+  .navbar-input-admin {
     padding: 8px;
-    border: 2px solid #ccc;
+    border: 1px solid #cccccc;
     border-radius: 5px;
-    margin-bottom: 8px;
-    width: 300px;
-    height: 35px;
-}
-.logout-button-admin {
-    position: relative;
-    left: 100px;
-    top: 3px;
-    margin-top: 0px;
-    padding: 8px 8px;
-    background-color: #565E6D;
-    border: 1px solid #f8f2f2;
-    border-radius: 4px;
-    cursor: pointer;
-    font-size: 14px;
+    width: 600px;
+  }
+  
+  .logout-button {
+    background-color: #4d4c4b;
     color: #ffffff;
-    font-family: 20px;
-}
-.logout-button{
-    position: relative;
-    left: 100px;
-    top: -5px;
-    margin: 14px;
-    padding: 9px 9px;
-    background-color: #565E6D;
-    border: 1px solid #f8f2f2;
-    border-radius: 4px;
+    border: none;
+    padding: 8px 16px;
+    border-radius: 5px;
     cursor: pointer;
-    font-size: 14px;
-    color: #ffffff;
-    font-family: 20px;
-}
-
-.logout-button:hover {
-    background-color: #fff7f7;
-    color: #565E6D;
-    border: 2px solid #565E6D;
-}
-
-
+  }
+  
+  .logout-button:hover {
+    background-color: #e6dcdb;
+  }
+  
+  .mt-1 {
+    margin-top: 5px;
+  }
+  
+  .mt-2 {
+    margin: 10px;
+    color: #000;
+    font-family: "italic";
+    font-size: 20px;
+  }
+  

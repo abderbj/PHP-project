@@ -69,7 +69,7 @@ function Users() {
 
 
     return (
-        <div className='users flex flex-col'>
+        <div className='users flex-col'>
             <table className='tab-admin '>
                 <thead>
                     <tr>
