@@ -100,51 +100,75 @@ const Rides = () => {
             console.log(data.get("id"));
             console.log(data.get("ride_id"));
             axios.post("http://localhost/Server/api.php", data)
-            .then(response => {
-                console.log(response.data);
-                if (response.status === 200) {
-                    alert("Ride joined successfully.");
+                .then(response => {
+                    console.log(response.data);
+                    if (response.status === 200) {
+                        alert("Ride joined successfully.");
 
-                } else {
+                    } else {
+                        alert("An error occurred. Please try again later.");
+                    }
+                })
+                .catch(error => {
+                    console.error(error);
                     alert("An error occurred. Please try again later.");
-                }
-            })
-            .catch(error => {
-                console.error(error);
-                alert("An error occurred. Please try again later.");
-            });}
+                });}
         else{
             if(offer.id !== localStorage.getItem("rideId"))
-            alert("You have already joined a ride. You can only join one ride at a time.");
+                alert("You have already joined a ride. You can only join one ride at a time.");
             else{
-
+                const data = new FormData();
+                const user = localStorage.getItem("userId");
+                data.append("action", "leaveRide");
+                data.append("id", user);
+                data.append("ride_id", offer.id);
+                console.log(data.get("id"));
+                console.log(data.get("ride_id"));
+                axios.post("http://localhost/Server/api.php", data)
+                    .then(response => {
+                        console.log(response.data);
+                        if (response.status === 200) {
+                            alert("Ride left successfully.");
+                            localStorage.setItem("buttonOn", 0);
+                        } else {
+                            alert("An error occurred. Please try again later.");
+                        }
+                    })
+                    .catch(error => {
+                        console.error(error);
+                        alert("An error occurred. Please try again later.");
+                    });
+                localStorage.setItem("buttonOn", 0);
+                localStorage.setItem("rideId", 0);
             }
 
         }
+
     }
+
     return (
         <div className='offers flex flex-col'>
             <table className='tab'>
                 <thead>
-                    <tr>
-                        <th>Profile Picture</th>
-                        <th>Name</th>
-                        <th>Date</th>
-                        <th>Time</th>
-                        <th>Price</th>
-                        <th>From</th>
-                        <th>To</th>
-                        <th>Rating</th>
-                        <th>Places</th>
-                        <th></th>
-                    </tr>
+                <tr>
+                    <th>Profile Picture</th>
+                    <th>Name</th>
+                    <th>Date</th>
+                    <th>Time</th>
+                    <th>Price</th>
+                    <th>From</th>
+                    <th>To</th>
+                    <th>Rating</th>
+                    <th>Places</th>
+                    <th></th>
+                </tr>
                 </thead>
                 {subOffers.map((offer) => {
                     return (
 
                         <tr key={offer.id}>
                             <td>
-                            <Dropdown overlay={menu(`data:image/png;base64,${offer.pfp_path}`,offer.id)} trigger={['click']}>
+                                <Dropdown overlay={menu(`data:image/png;base64,${offer.pfp_path}`,offer.id)} trigger={['click']}>
                                     <img src={`data:image/png;base64,${offer.pfp_path}`} alt='Profile Picture' className='pfp' />
                                 </Dropdown>
                             </td>
@@ -156,7 +180,7 @@ const Rides = () => {
                             <td>{offer.arrival}</td>
                             <td>{offer.rating}</td>
                             <td>{offer.places}</td>
-                            <td><button type="submit" className={"button"} onClick={() => buttonPressed(offer)}>Join</button></td>
+                            <td><button type="submit" className={"button"} onClick={() => buttonPressed(offer)}>{(localStorage.getItem("buttonOn") === 1) && localStorage.getItem("rideId") === offer.id ? "Leave" : "Join"}</button></td>
                         </tr>
                     );
                 })}
