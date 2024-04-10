@@ -3,13 +3,9 @@ import React, { useState } from "react";
 import "./LoginCard.css";
 import { useDispatch } from "react-redux";
 import { setUser } from "../reducers/UserReducer";
-import { useEffect } from "react";
 
 import axios from "axios";
 function LoginCard() {
-  useEffect(() => {
-    localStorage.clear();
-  }, []);
   const dispatch = useDispatch();
   const [showPassword, setShowPassword] = useState(false);
   const [email, setEmail] = useState("");
@@ -36,33 +32,20 @@ function LoginCard() {
       );
       console.log(response);   
       if (response.status === 200) {
-        if(response.data.message=="Incorrect password")
-        {
-          alert("Incorrect password");
-        }
-        else if(response.data.message=="User not found")
-        {
-          alert("User not found");
-        }
-        else if (response.data.message=="Failed to login")
-        {
-          alert("Failed to login");
-        }
-        else{
         console.log("User logged in successfully");
         console.log(response)
         localStorage.setItem("userId", response.data.id);
-        localStorage.setItem("admin", response.data.is_admin);
+        localStorage.setItem("buttonOn", 0);
         dispatch(setUser(response.data.id))
        // ReactSession.setStoreType("localStorage");
         //ReactSession.set("id", response.data.id);
-          
-        if (response.data.is_admin==1) {
+
+        if (response.data.isAdmin) {
           window.location.href = "/admin";
       } else {
           window.location.href = "/frontpage";
       }
-      }}
+      }
       
     } catch (error) {
       console.log(error);
