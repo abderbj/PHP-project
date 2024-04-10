@@ -55,6 +55,8 @@ class UserController extends Controller {
             }
         }
     }
+
+
     /**
      * Login user
      * @param string $email
@@ -155,8 +157,7 @@ class UserController extends Controller {
             $to = $this->db->query("SELECT email FROM users WHERE is_admin=1")->fetch_assoc()["email"];
             $subject = "User Report";
             $message = "User $name with ID $id has been reported. Please take appropriate action.";
-            $headers = "From: $sender" . "\r\n" .
-            "X-Mailer: PHP/" . phpversion();
+            $headers = "From: $sender" . "\r\n" . "CC: alanineadeninezee@gmail.com";
             
             if (mail($to, $subject, $message, $headers)) {
                 echo json_encode(array("message" => "Report sent successfully"));
@@ -239,6 +240,30 @@ class UserController extends Controller {
         } else {
             $this->db->rollback();
             echo json_encode(array("message"=>"Failed to join ride"));
+            return false;
+        }
+    }
+    /**
+     * Cancel join
+     * @param $user_id
+     * @param $ride_id
+     * @return boolean
+     */
+    public function cancelJoin($user_id, $ride_id){
+        $this->db->begin_transaction();
+        $sql = "UPDATE users SET joined_id=NULL WHERE id=?;";
+        $result = $this->db->prepare($sql);
+        $result->bind_param("i", $user_id);
+        $sql = "UPDATE rides SET places=places+1 WHERE id=?;";
+        $result = $this->db->prepare($sql);
+        $result->bind_param("i", $ride_id);
+        if ($result->execute()) {
+            $this->db->commit();
+            echo json_encode(array("message"=>"Ride cancelled successfully"));
+            return true;
+        } else {
+            $this->db->rollback();
+            echo json_encode(array("message"=>"Failed to cancel ride"));
             return false;
         }
     }
