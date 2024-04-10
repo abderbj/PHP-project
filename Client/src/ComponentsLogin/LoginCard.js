@@ -43,11 +43,12 @@ function LoginCard() {
           console.log(response);
           localStorage.setItem("userId", response.data.id);
           localStorage.setItem("buttonOn", 0);
+          localStorage.setItem("admin", response.data.is_admin);
           dispatch(setUser(response.data.id));
           // ReactSession.setStoreType("localStorage");
           //ReactSession.set("id", response.data.id);
 
-          if (response.data.isAdmin) {
+          if (response.data.is_admin == 1) {
             window.location.href = "/admin";
           } else {
             window.location.href = "/frontpage";
