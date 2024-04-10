@@ -99,7 +99,9 @@ else if($action === "createRide"){
 else if($action === "deleteRide"){
     $rideController->delete($_POST['id']);
 }
-
+else if($action === "cancelJoin"){
+    $userController->cancelJoin($_POST["id"],$_POST["ride_id"]);
+}
 else {
     echo json_encode(array("message"=>"Invalid action"));
 }
