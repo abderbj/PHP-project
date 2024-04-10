@@ -21,7 +21,7 @@ const Rides = (props) => {
         data.append("action", "report");
         data.append("id", id);
         data.append("reported_id",id);
-        axios.post("http://localhost/Server/api.php", data)
+        return axios.post("http://localhost/Server/api.php", data)
             .then(response => {
                 if (response.status === 200) {
                     alert("User has been reported.");
