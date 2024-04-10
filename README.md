@@ -24,14 +24,15 @@ To run the project, follow these steps:
 1. Install XAMPP from [here](https://www.apachefriends.org/index.html).
 2. Clone the project into `C:\xampp\htdocs`.
 3. Start the Apache and MySQL services in XAMPP.
-4. Navigate to the project's Client folder in your terminal.
-5. Run the following command to install dependencies:
+4. Import the database from the `db` folder using phpMyAdmin.
+5. Navigate to the project's Client folder in your terminal.
+6. Run the following command to install dependencies:
 
 ```
 npm install
 ```
 
-6. Start the frontend development server:
+7. Start the frontend development server:
 
 ```
 npm start
@@ -51,4 +52,5 @@ npm start
 - [Abderrahmen Bejaoui](https://github.com/abderbj)
 - [Adem Saidi](https://github.com/saidiadem)
 - [Rami Gharbi](https://github.com/erequem)
--  [Majdoub Sarra ](https://github.com/Sarra-majdoub)
+- [Majdoub Sarra ](https://github.com/Sarra-majdoub)
+- [Ala Eddine Zaouali](https://github.com/Ala-ADN)
