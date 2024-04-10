@@ -27,8 +27,10 @@ To run the project, follow these steps:
 4. Navigate to the project's Client folder in your terminal.
 5. Run the following command to install dependencies:
 
-```bash
+\`\`\`bash
 npm install
+\`\`\`
+
 6. Start the frontend development server:
 
 \`\`\`bash
