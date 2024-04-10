@@ -35,7 +35,7 @@ CREATE TABLE `rides` (
   `places` int(11) NOT NULL,
   `departure` varchar(255) NOT NULL,
   `arrival` varchar(255) NOT NULL,
-  `departure_time` TIMESTAMP  NOT NULL,
+  `departure_time` TIME  NOT NULL,
   `departure_date` date NOT NULL,
   `price` float(10) NOT NULL,
   `description` varchar(255) NOT NULL
@@ -112,9 +112,9 @@ ALTER TABLE `users`
 
 -- Insert dummy data into the `rides` table
 INSERT INTO `rides` (`id`, `places`, `departure`, `arrival`, `departure_time`, `departure_date`, `price`, `description`) VALUES
-(1, 3, 'New York', 'Los Angeles', '2024-03-28 08:00:00', '2024-03-28', 50.00, 'Road trip across the country'),
-(2, 2, 'San Francisco', 'Las Vegas', '2024-03-29 10:00:00', '2024-03-29', 30.00, 'Weekend getaway'),
-(3, 4, 'Chicago', 'Miami', '2024-03-30 12:00:00', '2024-03-30', 80.00, 'Vacation with friends');
+(1, 3, 'New York', 'Los Angeles', '08:00:00', '2024-03-28', 50.00, 'Road trip across the country'),
+(2, 2, 'San Francisco', 'Las Vegas', '10:00:00', '2024-03-29', 30.00, 'Weekend getaway'),
+(3, 4, 'Chicago', 'Miami', '12:00:00', '2024-03-30', 80.00, 'Vacation with friends');
 
 -- Insert dummy data into the `users` table
 INSERT INTO `users` (`id`, `firstname`, `lastname`, `phonenumber`, `email`, `password`, `pfp_path`, `is_admin`, `rating`, `nb_ratings`, `joined_id`, `driving_id`) VALUES

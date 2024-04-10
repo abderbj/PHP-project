@@ -125,7 +125,7 @@ const Rides = () => {
       else {
         const data = new FormData();
         const user = localStorage.getItem("userId");
-        data.append("action", "leaveRide");
+        data.append("action", "cancelJoin");
         data.append("id", user);
         data.append("ride_id", offer.id);
         console.log(data.get("id"));
