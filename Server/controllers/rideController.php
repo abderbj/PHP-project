@@ -8,7 +8,7 @@ class RideController extends Controller {
     /**
      * Get all rides
      * @uses String having (as in having at least X places available)
-     * @return array
+     * @return void
      */
     public function getAll() {
         $query = "SELECT 
@@ -16,6 +16,7 @@ class RideController extends Controller {
         drivers.firstname AS firstname,
         drivers.lastname AS lastname,
         drivers.email AS email,
+        drivers.id AS driver_id,
         drivers.phonenumber AS phonenumber,
         drivers.pfp_path AS pfp_path,
         drivers.rating AS rating,
@@ -52,7 +53,13 @@ class RideController extends Controller {
      */
     public function createRide($driver, $departure, $arrival, $date, $time, $places, $price, $description) {
         $this->db->begin_transaction();
-    
+        $query = "SELECT driving_id FROM users WHERE id = $driver";
+        $result = $this->db->query($query);
+        $row = $result->fetch_assoc();
+        if ($row['driving_id'] != null) {
+            echo json_encode(array("user_already_driving" => TRUE));
+            return;
+        }
         $query = "INSERT INTO rides (departure, arrival, departure_date, departure_time, price, places, description)
                   VALUES (?, ?, ?, ?, ?, ?, ?)";
         $stmt = $this->db->prepare($query);

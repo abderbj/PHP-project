@@ -5,11 +5,12 @@ import img from './cross.png';
 import { closeModal } from '../reducers/showModalReducer';
 import { useDispatch, useSelector } from 'react-redux';
 import {UserReducer} from "../reducers/UserReducer";
-const CreateNewRide = () => {
+
+const CreateNewRide = (props) => {
+    const dispatch = useDispatch();
    // const user = useSelector((state) => state.UserReducer.user);
     const user = localStorage.getItem("userId");
     console.log("user",user);
-    const dispatch = useDispatch();
     const [fromCity, setFromCity] = useState('');
     const [toCity, setToCity] = useState('');
     const [date, setDate] = useState('');
@@ -43,6 +44,7 @@ const CreateNewRide = () => {
             if (response.status === 200) {
                 console.log("New ride registered successfully");
                 handleCloseModal();
+                props.onNewRideCreated();
             }
         } catch (error) {
             console.error(error);

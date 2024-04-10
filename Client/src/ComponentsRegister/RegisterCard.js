@@ -2,8 +2,12 @@ import React, { useState } from "react";
 import { AiOutlineEye, AiOutlineEyeInvisible } from "react-icons/ai";
 import "./RegisterCard.css";
 import axios from "axios";
+import { useEffect } from "react";
 
 function RegisterCard({ image }) {
+  useEffect(() => {
+    localStorage.clear();
+  }, []);
   const [showPassword, setShowPassword] = useState(false);
   const [firstName, setFirstName] = useState("");
   const [lastName, setLastName] = useState("");
