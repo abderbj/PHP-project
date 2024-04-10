@@ -48,4 +48,4 @@ npm start
 
 ## Contributors
 
-- [Abderrahmen Bejaoui]([https://github.com/johndoe](https://github.com/abderbj))
+- [Abderrahmen Bejaoui](https://github.com/abderbj)
