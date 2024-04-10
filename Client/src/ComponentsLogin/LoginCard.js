@@ -30,30 +30,35 @@ function LoginCard() {
         "http://localhost/Server/api.php",
         data
       );
-      console.log(response);   
+      console.log(response);
       if (response.status === 200) {
-        console.log("User logged in successfully");
-        console.log(response)
-        localStorage.setItem("userId", response.data.id);
-        localStorage.setItem("buttonOn", 0);
-        dispatch(setUser(response.data.id))
-       // ReactSession.setStoreType("localStorage");
-        //ReactSession.set("id", response.data.id);
+        if (response.data.message == "Incorrect password") {
+          alert("Incorrect password");
+        } else if (response.data.message == "User not found") {
+          alert("User not found");
+        } else if (response.data.message == "Failed to login") {
+          alert("Failed to login");
+        } else {
+          console.log("User logged in successfully");
+          console.log(response);
+          localStorage.setItem("userId", response.data.id);
+          localStorage.setItem("buttonOn", 0);
+          dispatch(setUser(response.data.id));
+          // ReactSession.setStoreType("localStorage");
+          //ReactSession.set("id", response.data.id);
 
-        if (response.data.isAdmin) {
-          window.location.href = "/admin";
-      } else {
-          window.location.href = "/frontpage";
+          if (response.data.isAdmin) {
+            window.location.href = "/admin";
+          } else {
+            window.location.href = "/frontpage";
+          }
+        }
       }
-      }
-      
     } catch (error) {
       console.log(error);
       if (error.response.status === 401) {
-        alert("Invalid email or password");        
+        alert("Invalid email or password");
       }
-     
-      
     }
   };
   return (
@@ -96,7 +101,7 @@ function LoginCard() {
                 </div>
               </div>
             </div>
-            <button  type="submit" id="LoginButton" className="btn btn-primary">
+            <button type="submit" id="LoginButton" className="btn btn-primary">
               Login
             </button>
             <p className="login-link">

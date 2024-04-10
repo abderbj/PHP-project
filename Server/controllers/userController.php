@@ -263,9 +263,9 @@ class UserController extends Controller {
         $sql = "UPDATE users SET joined_id=? WHERE id=?;";
         $result = $this->db->prepare($sql);
         $result->bind_param("ii", $ride_id, $user_id);
-        $sql = "UPDATE rides SET places=places-1 WHERE id=?;";
-        $result = $this->db->prepare($sql);
-        $result->bind_param("i", $ride_id);
+        // $sql = "UPDATE rides SET places=places-1 WHERE id=?;";
+        // $result = $this->db->prepare($sql);
+        // $result->bind_param("i", $ride_id);
         if ($result->execute()) {
             $this->db->commit();
             echo json_encode(array("message"=>"Ride joined successfully"));
@@ -287,9 +287,9 @@ class UserController extends Controller {
         $sql = "UPDATE users SET joined_id=NULL WHERE id=?;";
         $result = $this->db->prepare($sql);
         $result->bind_param("i", $user_id);
-        $sql = "UPDATE rides SET places=places+1 WHERE id=?;";
-        $result = $this->db->prepare($sql);
-        $result->bind_param("i", $ride_id);
+        // $sql = "UPDATE rides SET places=places+1 WHERE id=?;";
+        // $result = $this->db->prepare($sql);
+        // $result->bind_param("i", $ride_id);
         if ($result->execute()) {
             $this->db->commit();
             echo json_encode(array("message"=>"Ride cancelled successfully"));
