@@ -35,6 +35,7 @@ function LoginCard() {
         console.log("User logged in successfully");
         console.log(response)
         localStorage.setItem("userId", response.data.id);
+        localStorage.setItem("buttonOn", 0);
         dispatch(setUser(response.data.id))
        // ReactSession.setStoreType("localStorage");
         //ReactSession.set("id", response.data.id);

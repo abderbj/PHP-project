@@ -13,7 +13,6 @@ const Rides = () => {
         setSelectedImage(image);
         setIsModalVisible(true);
     };
-   
 
     const reportUser = (id) => {
         const data = new FormData();
@@ -85,15 +84,22 @@ const Rides = () => {
         setSubOffers(offers.slice((currentPage - 1) * 9, currentPage * 9));
         console.log(subOffers);
     }, [currentPage, offers]);
+
     const buttonPressed = (offer) => {
-        const data = new FormData();
-        const user = localStorage.getItem("userId");
-        data.append("action", "joinRide");
-        data.append("id", user);
-        data.append("ride_id", offer.id);
-        console.log(data.get("id"));
-        console.log(data.get("ride_id"));
-        axios.post("http://localhost/Server/api.php", data)
+        let buttonOn = localStorage.getItem("buttonOn");
+        console.log(buttonOn);
+        if (buttonOn==0){
+            localStorage.setItem("buttonOn", 1);
+            localStorage.setItem("rideId", offer.id);
+            const associatedRide = localStorage.getItem("rideId");
+            const data = new FormData();
+            const user = localStorage.getItem("userId");
+            data.append("action", "joinRide");
+            data.append("id", user);
+            data.append("ride_id", offer.id);
+            console.log(data.get("id"));
+            console.log(data.get("ride_id"));
+            axios.post("http://localhost/Server/api.php", data)
             .then(response => {
                 console.log(response.data);
                 if (response.status === 200) {
@@ -106,7 +112,15 @@ const Rides = () => {
             .catch(error => {
                 console.error(error);
                 alert("An error occurred. Please try again later.");
-            });
+            });}
+        else{
+            if(offer.id !== localStorage.getItem("rideId"))
+            alert("You have already joined a ride. You can only join one ride at a time.");
+            else{
+
+            }
+
+        }
     }
     return (
         <div className='offers flex flex-col'>
@@ -127,6 +141,7 @@ const Rides = () => {
                 </thead>
                 {subOffers.map((offer) => {
                     return (
+
                         <tr key={offer.id}>
                             <td>
                             <Dropdown overlay={menu(`data:image/png;base64,${offer.pfp_path}`,offer.id)} trigger={['click']}>
