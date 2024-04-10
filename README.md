@@ -33,9 +33,9 @@ npm install
 
 6. Start the frontend development server:
 
-\`\`\`bash
+```
 npm start
-\`\`\`
+```
 
 ## Usage
 
