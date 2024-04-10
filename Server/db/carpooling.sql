@@ -35,7 +35,7 @@ CREATE TABLE `rides` (
   `places` int(11) NOT NULL,
   `departure` varchar(255) NOT NULL,
   `arrival` varchar(255) NOT NULL,
-  `departure_time` datetime NOT NULL,
+  `departure_time` TIMESTAMP  NOT NULL,
   `departure_date` date NOT NULL,
   `price` float(10) NOT NULL,
   `description` varchar(255) NOT NULL

@@ -69,8 +69,9 @@ else if($action === "getAllRides"){
         $rideController->addWhere("departure LIKE '%".$_POST['departure']."%'");
     }
     if(isset($_POST['arrival'])){
-        $rideController->addWhere("arrival'])){ LIKE '%".$_POST['arrival']."%'");
+        $rideController->addWhere("arrival LIKE '%".$_POST['arrival']."%'");
     }
+    //Date Format yyyy-mm-dd
     if(isset($_POST['date'])){
         $rideController->addWhere("date = '".$_POST['date']."'");
     }

@@ -8,7 +8,7 @@ class RideController extends Controller {
     /**
      * Get all rides
      * @uses String having (as in having at least X places available)
-     * @return void
+     * @return array
      */
     public function getAll() {
         $query = "SELECT 
@@ -27,6 +27,8 @@ class RideController extends Controller {
         users AS passengers ON rides.id = passengers.joined_id
     LEFT JOIN
         users AS drivers ON rides.id = drivers.driving_id
+    WHERE 
+        rides.places > 0 and $this->where
     GROUP BY 
         rides.id;";
         $result = $this->db->query($query);
