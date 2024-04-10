@@ -107,7 +107,7 @@ const Rides = (props) => {
                     return (
                         <tr key={offer.id}>
                             <td>
-                            <Dropdown menu={menu(`data:image/png;base64,${offer.pfp_path}`,offer.id)} trigger={['click']}>
+                            <Dropdown overlay={menu(`data:image/png;base64,${offer.pfp_path}`,offer.id)} trigger={['click']}>
                                     <img src={`data:image/png;base64,${offer.pfp_path}`} alt='Profile Picture' className='pfp' />
                                 </Dropdown>
                             </td>
