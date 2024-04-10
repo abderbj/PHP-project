@@ -1,35 +1,66 @@
-.nav-bar-admin{
-    gap: 40px;
-    width: 100%;
-    background-color: #DEE1E6;
-    height : 73px;
+.nav-bar-admin {
+  gap: 40px;
+  width: 100%;
+  background-color: #dee1e6;
+  height: 73px;
 }
 
 .nav-bar-label-admin {
-    font-weight: bold;
-    margin-right: 8px;
+  font-weight: bold;
+  margin-right: 8px;
 }
 
 .nav-bar-img-admin {
-    margin-right: 16px; 
+  margin-right: 16px;
 }
 
 .navbar-div-admin {
-    display: flex;
-    margin-right: 10px;
-    position: relative;
-    left: 130px;
-    top: 7px;
+  /* display: flex; */
+  margin-right: 10px;
+  position: relative;
+  left: 130px;
+  top: 7px;
 }
 
 .navbar-input-admin {
-    padding: 8px;
-    border: 1px solid #ccc;
-    border-radius: 5px;
-    margin-bottom: 8px;
-    width: 357px;
-    height: 35px;
-    
+  padding: 8px;
+  border: 2px solid #ccc;
+  border-radius: 5px;
+  margin-bottom: 8px;
+  width: 300px;
+  height: 35px;
+}
+.logout-button-admin {
+  position: relative;
+  left: 100px;
+  top: 3px;
+  margin-top: 0px;
+  padding: 8px 8px;
+  background-color: #565e6d;
+  border: 1px solid #f8f2f2;
+  border-radius: 4px;
+  cursor: pointer;
+  font-size: 14px;
+  color: #ffffff;
+  font-family: 20px;
+}
+.logout-button {
+  position: relative;
+  left: 100px;
+  top: -5px;
+  margin: 14px;
+  padding: 9px 9px;
+  background-color: #565e6d;
+  border: 1px solid #f8f2f2;
+  border-radius: 4px;
+  cursor: pointer;
+  font-size: 14px;
+  color: #ffffff;
+  font-family: 20px;
 }
 
-
+.logout-button:hover {
+  background-color: #fff7f7;
+  color: #565e6d;
+  border: 2px solid #565e6d;
+}
