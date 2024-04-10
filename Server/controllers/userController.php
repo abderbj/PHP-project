@@ -1,6 +1,11 @@
 <?php
 
 include 'controller.php';
+use PHPMailer\PHPMailer\PHPMailer;
+use PHPMailer\PHPMailer\Exception;
+require 'PHPMailer/src/Exception.php';
+require 'PHPMailer/src/PHPMailer.php';
+require 'PHPMailer/src/SMTP.php';
 class UserController extends Controller {
 
     public function __construct() {
@@ -156,20 +161,41 @@ class UserController extends Controller {
     public function report($reporter_id, $id) {
         $sql = "SELECT * FROM $this->table WHERE id=$id ORDER BY firstname ASC";
         // $reporter_id = $_SESSION['user_id'];
-        $result = $this->db->query($sql);
+        $result = $this->db->query($sql)->fetch_assoc();
         //if ($result["rating"] <= 1 and $result["nb_ratings"] > 2) {
-            $name = $result["firstname"] . " " . $result["lastname"];
-            $sender = $this->db->query("SELECT email FROM $this->table WHERE id=$reporter_id")["email"];
-            $to = $this->db->query("SELECT email FROM $this->table WHERE is_admin=1")["email"];
-            $subject = "User Report";
-            $message = "User $name with ID $id has been reported. Please take appropriate action.";
-            $headers = "From: $sender" . "\r\n" . "CC: alanineadeninezee@gmail.com";
-            
-            if (mail($to, $subject, $message, $headers)) {
-                echo json_encode(array("message" => "Report sent successfully"));
-            } else {
-                echo json_encode(array("message" => "Failed to send report"));
-            }
+        $name = $result["firstname"] . " " . $result["lastname"];
+        // $sender = $this->db->query("SELECT email FROM $this->table WHERE id=$reporter_id")["email"];
+        $to = $this->db->query("SELECT email FROM $this->table WHERE is_admin=1")->fetch_assoc()["email"];
+        // $subject = "User Report";
+        // $message = "User $name with ID $id has been reported. Please take appropriate action.";
+        // $headers = "From: $sender" . "\r\n" . "CC: alanineadeninezee@gmail.com";
+        try{
+            $mail = new PHPMailer(true);
+            $mail->isSMTP();
+            // here you will provide the smtp host and it will work inchallah
+            $mail->Host = 'smtp.gmail.com';
+            $mail->SMTPAuth = true;
+            $mail->Username = 'mkchFthnity@gmail.com';
+            $mail->Password = 'khatar123';
+            $mail->SMTPSecure = PHPMailer::ENCRYPTION_STARTTLS;
+            $mail->Port = 270;
+            $mail->setFrom('mkchFthnity@gmail.com', 'thnity admin');
+            $mail->addAddress($to);
+            $mail->isHTML(true);
+            $mail->Subject = 'User Report';
+            $mail->Body = 'User '. $name .' with ID ' . $id . ' has been reported. Please take appropriate action.';
+            $mail->send();
+            echo json_encode(array("message"=>"sent successfully"));
+        }catch(Exception $e){
+            echo json_encode(array("message" => "Failed to send report"));
+            echo json_encode(array("error"=>$e));
+        }
+
+            // if (mail($to, $subject, $message, $headers)) {
+            //     echo json_encode(array("message" => "Report sent successfully"));
+            // } else {
+            //     echo json_encode(array("message" => "Failed to send report"));
+            // }
        // }
     }
     /**
