@@ -8,7 +8,7 @@ class RideController extends Controller {
     /**
      * Get all rides
      * @uses String having (as in having at least X places available)
-     * @return array
+     * @return void
      */
     public function getAll() {
         $query = "SELECT 
