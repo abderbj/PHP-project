@@ -27,14 +27,12 @@ else if($action === "login"){
 //     echo json_encode(array("message"=>"logged out successfully"));
 // }
 else if($action === "getAllUsers"){
+    //OPTIONAL ARGS
     if(isset($_POST['orderBy'])){
         $userController->setOrderBy($_POST['orderBy']);
     }
-    /**
-     * @example $_POST['where'] = "rating > 4"
-     */
-    if(isset($_POST['where'])){
-        $userController->setWhere($_POST['where']);
+    if(isset($_POST['rating'])){
+        $userController->setWhere("rating >= " . $_POST['rating']);
     }
     if(isset($_POST['firstName'])){
         $userController->addWhere("firstname LIKE '%".$_POST['firstName']."%'");

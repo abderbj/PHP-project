@@ -206,7 +206,8 @@ class UserController extends Controller {
      * @return array
      */
     public function getAll() {
-        $query = "select * from users";
+        $query = "SELECT * FROM users\n
+        WHERE $this->where";
         $result = $this->db->query($query);
         $results = array();
         while ($row = $result->fetch_assoc()) {
