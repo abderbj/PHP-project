@@ -102,11 +102,12 @@ const Rides = (props) => {
                         <th>Places</th>
                     </tr>
                 </thead>
+                <tbody>
                 {subOffers.map((offer) => {
                     return (
                         <tr key={offer.id}>
                             <td>
-                            <Dropdown overlay={menu(`data:image/png;base64,${offer.pfp_path}`,offer.id)} trigger={['click']}>
+                            <Dropdown menu={menu(`data:image/png;base64,${offer.pfp_path}`,offer.id)} trigger={['click']}>
                                     <img src={`data:image/png;base64,${offer.pfp_path}`} alt='Profile Picture' className='pfp' />
                                 </Dropdown>
                             </td>
@@ -121,9 +122,11 @@ const Rides = (props) => {
                         </tr>
                     );
                 })}
+                </tbody>
+                
             </table>
             <Pagination defaultCurrent={1} total={50} onChange={(page) => setCurrentPage(page)} className='pag' />
-            <Modal visible={isModalVisible} onCancel={() => setIsModalVisible(false)} footer={null} centered>
+            <Modal open={isModalVisible} onCancel={() => setIsModalVisible(false)} footer={null} centered>
                 <img src={selectedImage} alt="Profile" style={{ width: '100%', height: 'auto' }} />
             </Modal>
         </div>
