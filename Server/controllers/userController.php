@@ -226,15 +226,18 @@ class UserController extends Controller {
         // }
         // $user_id = $_SESSION['user_id'];
         $this->db->begin_transaction();
-        $sql = "UPDATE users SET joined_id=$ride_id WHERE id=$user_id;";
+        $sql = "UPDATE users SET joined_id=? WHERE id=?;";
         $result = $this->db->prepare($sql);
-        $sql = "UPDATE rides SET places=places-1 WHERE id=$ride_id;";
+        $result->bind_param("ii", $ride_id, $user_id);
+        $sql = "UPDATE rides SET places=places-1 WHERE id=?;";
         $result = $this->db->prepare($sql);
-        $result = $result->execute();
-        if ($result) {
+        $result->bind_param("i", $ride_id);
+        if ($result->execute()) {
+            $this->db->commit();
             echo json_encode(array("message"=>"Ride joined successfully"));
             return true;
         } else {
+            $this->db->rollback();
             echo json_encode(array("message"=>"Failed to join ride"));
             return false;
         }
