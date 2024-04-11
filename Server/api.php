@@ -73,7 +73,7 @@ else if($action === "getAllRides"){
     }
     //Date Format yyyy-mm-dd
     if(isset($_POST['date'])){
-        $rideController->addWhere("date = '".$_POST['date']."'");
+        $rideController->addWhere("departure_date = '".$_POST['date']."'");
     }
     if(isset($_POST['price'])){
         $rideController->addWhere("price <= ".$_POST['price']);
