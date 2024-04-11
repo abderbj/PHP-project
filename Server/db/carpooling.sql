@@ -118,10 +118,10 @@ INSERT INTO `rides` (`id`, `places`, `departure`, `arrival`, `departure_time`, `
 
 -- Insert dummy data into the `users` table
 INSERT INTO `users` (`id`, `firstname`, `lastname`, `phonenumber`, `email`, `password`, `pfp_path`, `is_admin`, `rating`, `nb_ratings`, `joined_id`, `driving_id`) VALUES
-(1, 'John', 'Doe', 1234567890, 'john.doe@example.com', 'password123', 'im/default.PNG', 0, 4.5, 10, 1, 2),
-(2, 'Jane', 'Smith', 9876543210, 'jane.smith@example.com', 'password456', 'im/default.PNG', 0, 4.2, 8, 2, 3),
-(3, 'Mike', 'Johnson', 5555555555, 'mike.johnson@example.com', 'password789', 'im/default.PNG', 1, 4.8, 12, 3, 1);
-
+(1, 'John', 'Doe', 1234567890, 'john.doe@example.com', 'password123', 'images/default.PNG', 0, 4.5, 10, 1, 2),
+(2, 'Jane', 'Smith', 9876543210, 'jane.smith@example.com', 'password456', 'images/default.PNG', 0, 4.2, 8, 2, 3),
+(3, 'Mike', 'Johnson', 5555555555, 'mike.johnson@example.com', 'password789', 'images/default.PNG', 1, 4.8, 12, 3, 1),
+(4, 'Aymen', 'Sallaouti', 25217470, 'aymen.sallaouti@insat.ucar.tn', '$2y$10$Ng.lJ6.o2mMpF8bWuvrqFuel2cvgp/LYZ4NAgg3poiHdj05qnv14e', 'images/66173b51292ed.PNG', 1, 0, 0, NULL, NULL);
 
 
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;

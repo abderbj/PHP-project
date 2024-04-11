@@ -47,6 +47,11 @@ npm start
 5. Report other users via the admin email if necessary.
 6. Admins can access the admin dashboard to manage reported users and monitor application activity.
 
+Admin credentials:
+
+- Email: aymen.sallaouti@insat.ucar.tn
+- Password: 123456789
+
 ## Contributors
 
 - [Abderrahmen Bejaoui](https://github.com/abderbj)
