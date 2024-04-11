@@ -30,8 +30,8 @@ class RideController extends Controller {
     WHERE 
         rides.places > 0 and $this->where
     GROUP BY 
-        rides.id;
-    HAVING (places-user_count) >= $this->having";
+        rides.id
+    HAVING user_count < places-$this->having";
         $result = $this->db->query($query);
         $rows = array();
         while($row = $result->fetch_assoc()) {

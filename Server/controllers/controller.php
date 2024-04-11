@@ -15,6 +15,7 @@ abstract class Controller {
         }
         $this->table = $table;
         $this->where = "TRUE";
+        $this->having = "TRUE";
         $this->orderBy = "firstname ASC";
     }
     /**
