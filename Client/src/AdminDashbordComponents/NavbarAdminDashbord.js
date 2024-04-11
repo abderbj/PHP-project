@@ -2,7 +2,7 @@ import React, { useState } from "react";
 import RegisterHeader from "../ComponentsRegister/RegisterHeader";
 
 import "./NavbarAdminDashbord.css";
-import AdminLogout from "./AdminLogout";
+import Logout from "../FrontPageComponents/Logout";
 
 const NavBarAdminDashbord = () => {
   return (
@@ -14,7 +14,7 @@ const NavBarAdminDashbord = () => {
           name="username"
           className="mt-1 navbar-input-admin"
         />
-      <AdminLogout />
+      <Logout />
     </div>
   );
 };

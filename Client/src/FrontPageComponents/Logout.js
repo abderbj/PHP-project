@@ -8,7 +8,7 @@ function Logout() {
     window.location.href = "/login";
   };
   return (
-    <button class="logout-button1" onClick={handleLogout}>
+    <button class="logout-button" onClick={handleLogout}>
       Logout
     </button>
   );

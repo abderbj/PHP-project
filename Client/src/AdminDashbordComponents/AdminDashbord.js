@@ -8,7 +8,6 @@ function AdminDashbord() {
       <NavbarAdminDashbord />
       <SideBar />
       <Users />
-      
     </div>
   );
 }
