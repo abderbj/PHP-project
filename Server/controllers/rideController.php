@@ -12,25 +12,26 @@ class RideController extends Controller {
      */
     public function getAll() {
         $query = "SELECT 
-        rides.*, 
-        drivers.firstname AS firstname,
-        drivers.lastname AS lastname,
-        drivers.email AS email,
-        drivers.id AS driver_id,
-        drivers.phonenumber AS phonenumber,
-        drivers.pfp_path AS pfp_path,
-        drivers.rating AS rating,
-        COUNT(passengers.id) AS user_count
-    FROM 
-        rides 
-    LEFT JOIN 
-        users AS passengers ON rides.id = passengers.joined_id
-    LEFT JOIN
-        users AS drivers ON rides.id = drivers.driving_id
-    WHERE 
-        rides.places > 0 and $this->where
-    GROUP BY 
-        rides.id;";
+                rides.*,
+                drivers.firstname AS firstname,
+                drivers.lastname AS lastname,
+                drivers.email AS email,
+                drivers.id AS driver_id,
+                drivers.phonenumber AS phonenumber,
+                drivers.pfp_path AS pfp_path,
+                drivers.rating AS rating,
+                COUNT(passengers.id) AS user_count
+            FROM
+                rides
+            LEFT JOIN
+                users AS passengers ON rides.id = passengers.joined_id
+            LEFT JOIN
+                users AS drivers ON rides.id = drivers.driving_id
+            WHERE
+                rides.places > 0 and $this->where
+            GROUP BY
+                rides.id
+            HAVING user_count < places-$this->having";
         $result = $this->db->query($query);
         $rows = array();
         while($row = $result->fetch_assoc()) {

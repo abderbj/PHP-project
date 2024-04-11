@@ -4,11 +4,19 @@ import { useSelector } from 'react-redux'
 import { Pagination } from 'antd';
 import axios from 'axios';
 import "./Rides.css";
-import { Menu, Dropdown, Spin,Modal } from 'antd';
-import { UserOutlined } from '@ant-design/icons';
+import { Menu, Dropdown ,Modal } from 'antd';
+import moment from 'moment';
 const Rides = () => {
     const [isModalVisible, setIsModalVisible] = useState(false);
     const [selectedImage, setSelectedImage] = useState(null);
+    const places = useSelector(state => state.filters.places);
+    const time = useSelector(state => state.filters.time);
+    const date = useSelector(state => state.filters.date);
+    const departure = useSelector(state => state.filters.departure);
+    const arrival = useSelector(state => state.filters.arrival);
+    const rating = useSelector(state => state.filters.rating);
+    const currency = useSelector(state => state.filters.currency);
+
     const viewProfilePicture = (image) => {
         setSelectedImage(image);
         setIsModalVisible(true);
@@ -22,13 +30,23 @@ const Rides = () => {
         axios.post("http://localhost/Server/api.php", data)
             .then(response => {
                 if (response.status === 200) {
-                    alert("User has been reported.");
-                } else {
-                    alert("An error occurred. Please try again later.");
+                    if (response.status === 200) {
+                        const responseData = response.data;
+                        console.log(responseData);
+                        if (responseData === "[]null") {
+                            setOffers([]);
+                        } else {
+                            setOffers(responseData);
+                            console.log(responseData);
+                        }
+
+                        alert("User has been reported.");
+                    } else {
+                        alert("An error occurred. Please try again later.");
+                    }
                 }
             })
             .catch(error => {
-                console.error(error);
                 alert("An error occurred. Please try again later.");
             });
     };
@@ -49,14 +67,16 @@ const Rides = () => {
     const [subOffers, setSubOffers ] = useState(offers.slice(0, 9));
     useEffect(() => {
         async function fetchData() {
+            console.log(departure, arrival, date, time, rating, currency, places);
+            const formattedDate = moment(date).format('YYYY-MM-DD');
             const data = new FormData();
-            if (filters.departure) data.append("departure", filters.from);
-            if (filters.arrival) data.append("arrival", filters.to);
-            if (filters.date) data.append("date", filters.date);
-            if (filters.time) data.append("time", filters.time);
-            if (filters.rating) data.append("rating", filters.rating);
-            if (filters.currency) data.append("price", filters.currency);
-            if (filters.places) data.append("having", filters.places);
+            if (departure) data.append("departure", departure);
+            if (arrival) data.append("arrival", arrival);
+            if (date) data.append("date", formattedDate);
+            if (time) data.append("time", time);
+            if (rating) data.append("rating", rating);
+            if (currency) data.append("price", currency);
+            if (places) data.append("having", places);
             data.append("action", "getAllRides");
 
             try {
@@ -64,11 +84,13 @@ const Rides = () => {
                 console.log(response);
                 if (response.status === 200) {
                     const responseData = response.data;
+                    console.log(responseData)
+                    console.log("heyyy")
                     if (responseData === "[]null") {
+                        console.log("inn")
                         setOffers([]);
                     } else {
                         setOffers(responseData);
-                        console.log(responseData);
                     }
                 }
             } catch (error) {
@@ -79,16 +101,17 @@ const Rides = () => {
 
         // Call fetchData only once when component mounts
         fetchData();
-    }, []);
+    }, [places, time, date, departure, arrival, rating, currency]);
     useEffect(() => {
         setSubOffers(offers.slice((currentPage - 1) * 9, currentPage * 9));
+        console.log("hereeeee")
         console.log(subOffers);
     }, [currentPage, offers]);
 
     const buttonPressed = (offer) => {
         let buttonOn = localStorage.getItem("buttonOn");
         console.log(buttonOn);
-        if (buttonOn==0){
+        if (buttonOn == 0){
             localStorage.setItem("buttonOn", 1);
             localStorage.setItem("rideId", offer.id);
             const associatedRide = localStorage.getItem("rideId");
@@ -141,9 +164,7 @@ const Rides = () => {
                 localStorage.setItem("buttonOn", 0);
                 localStorage.setItem("rideId", 0);
             }
-
         }
-
     }
 
     return (
@@ -180,7 +201,7 @@ const Rides = () => {
                             <td>{offer.arrival}</td>
                             <td>{offer.rating}</td>
                             <td>{offer.places}</td>
-                            <td><button type="submit" className={"button"} onClick={() => buttonPressed(offer)}>{(localStorage.getItem("buttonOn") === 1) && localStorage.getItem("rideId") === offer.id ? "Leave" : "Join"}</button></td>
+                            <td><button type="submit" className={"button"} onClick={() => buttonPressed(offer)}>Join/Leave</button></td>
                         </tr>
                     );
                 })}
