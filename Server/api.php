@@ -79,7 +79,7 @@ else if($action === "getAllRides"){
         $rideController->addWhere("price <= ".$_POST['price']);
     }
     if(isset($_POST['rating'])){
-        $rideController->addWhere("rating >= ".$_POST['rating']);
+        $rideController->addWhere("drivers.rating >= ".$_POST['rating']);
     }
     // if(isset($_POST['where'])){
     //     $rideController->setWhere($_POST['where']);
