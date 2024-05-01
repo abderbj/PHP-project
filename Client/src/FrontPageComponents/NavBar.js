@@ -3,7 +3,7 @@ import "./NavBar.css";
 import RegisterHeader from "../ComponentsRegister/RegisterHeader";
 import { useDispatch } from "react-redux";
 import { setFrom, setTo, setDate } from "../reducers/filtersReducer";
-import Logout from "./logout";
+import Logout from "./Logout";
 const NavBar = () => {
   const dispatch = useDispatch();
   return (

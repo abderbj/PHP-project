@@ -1,23 +1,23 @@
-.side-bar-admin{
-    margin-top: 40px;
+.side-bar-admin {
+  margin-top: 40px;
 }
 
-.review-admin{
+.review-admin {
   margin-right: 195px;
   font-weight: bold;
 }
 
-.inp-admin{
+.inp-admin {
   position: relative;
   top: 4px;
 }
 
-.star-admin{
+.star-admin {
   position: relative;
   top: 6px;
 }
-.text-admin{
-    font-weight: bold;
-    margin-right: 8px;
-    font-size: large;
+.text-admin {
+  font-weight: bold;
+  margin-right: 8px;
+  font-size: large;
 }
