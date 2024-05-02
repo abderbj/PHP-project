@@ -68,7 +68,6 @@ const Rides = () => {
   const [subOffers, setSubOffers] = useState(offers.slice(0, 9));
   useEffect(() => {
     async function fetchData() {
-      console.log(departure, arrival, date, time, rating, currency, places);
       const formattedDate = moment(date).format("YYYY-MM-DD");
       const data = new FormData();
       if (departure) data.append("departure", departure);

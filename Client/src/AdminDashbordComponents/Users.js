@@ -9,8 +9,9 @@ function Users() {
   const [users, setUsers] = useState([]);
   const [currentPage, setCurrentPage] = useState(1);
   const [subOffers, setSubOffers] = useState([]);
-  const search = useSelector((state) => state.text);
-  console.log("search", search);
+  const search = useSelector((state) => state.search.text);
+  // show me the length of search
+  console.log(search.length);
   const handleDeleteUser = (u) => {
     const newUsers = users.filter((user) => user.Phone !== u.Phone);
     console.log(u);
@@ -69,12 +70,17 @@ function Users() {
     setSubOffers(users.slice((currentPage - 1) * 9, currentPage * 9));
   }, [currentPage, users]);
   useEffect(() => {
+    if(search.length === 0) {
+      console.log("in");
+      console.log();
+      setSubOffers(users);
+      setCurrentPage(1);
+    }
     if (search) {
-      const filteredUsers = subOffers.filter((user) =>
+      const filteredUsers = users.filter((user) =>
         user.firstname.toLowerCase().includes(search.toLowerCase())
       );
       setSubOffers(filteredUsers);
-      console.log(search);
       setCurrentPage(1);
     }
   }, [search]);
