@@ -1,7 +1,7 @@
 .users {
   position: relative;
-  left: 600px;
-  bottom: 450px;
+  left: 400px;
+  bottom: 280px;
 }
 
 .tab-admin {
@@ -45,4 +45,15 @@ tr:nth-child(even) {
 
 tr:nth-child(even):hover {
   background-color: #f2f2f2;
+}
+
+.text-admin {
+  font-weight: bold;
+  margin-right: 8px;
+  font-size: large;
+}
+
+.div-num{
+  height: 50px;
+  width: 500px;
 }

@@ -91,7 +91,7 @@ function Users() {
           <tr>
             <th>Firstname</th>
             <th>Lastame</th>
-            <th>Rating</th>
+            <th>Email</th>
             <th>Phone</th>
             <th></th>
           </tr>
@@ -102,7 +102,7 @@ function Users() {
               <tr key={user.id}>
                 <td>{user.firstname}</td>
                 <td>{user.lastname}</td>
-                <td>{user.rating}</td>
+                <td>{user.email}</td>
                 <td>{user.phonenumber}</td>
                 <td onClick={() => handleDeleteUser(user)}>
                   <RiDeleteBin5Line />
